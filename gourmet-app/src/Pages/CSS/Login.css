@@ -1,0 +1,80 @@
+#back{
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#form1{
+    background: #ffffffaf;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+}
+#form2{
+    background: #ffffffaf;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+}
+
+.input{
+    
+    width: 80%;
+    margin: 10px;
+}
+#pass{
+    width: 80%;
+    margin: 10px;
+    border: none;
+    outline: none;
+}
+#pass2{
+    width: 80%;
+    margin: 10px;
+    border: none;
+    outline: none;
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 100px;
+}

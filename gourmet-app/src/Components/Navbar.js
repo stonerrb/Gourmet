@@ -1,0 +1,40 @@
+import React from 'react';
+import {BrowserRouter, Link, Route, Router, Routes, Switch} from 'react-router-dom';
+import Home from '../Pages/Home';
+import Menu from '../Pages/Menu';
+import Contact from '../Pages/Contact';
+import './Navbar.css';
+import Cart from "../Pages/Cart";
+import Wishlist from "../Pages/Wishlist";
+import Badge from '@mui/material/Badge';
+
+function Navbar() {
+    
+    return (
+        <div>
+            <BrowserRouter>
+                <nav>
+                    <p>Gourmet.</p>
+                    <div class="nav-links">
+                <Link to="/" className="menu-buttons">Home</Link>
+                <Link to="/menu" className="menu-buttons">Menu</Link>
+                <Link to="/contact" className="menu-buttons">Contact</Link>
+                    </div>
+                <div class="nav-items">
+                <Link to="/wishlist" className="menu-links" id="wishlist-icon"><i className="fa-solid fa-heart"></i></Link>
+                <Link to="/cart" className="menu-links" id="cart-icon"><i className="fa-solid fa-cart-shopping"></i></Link>
+                </div>
+            </nav>
+                <Routes>
+                    <Route exact path="/" element={<Home/>} />
+                    <Route path="/menu" element={<Menu/>} />
+                    <Route path="/contact" element={<Contact/>} />
+                    <Route path="/wishlist" element={<Wishlist/>} />
+                    <Route path="/cart" element={<Cart/>} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
+}
+
+export default Navbar;
