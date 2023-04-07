@@ -17,14 +17,14 @@ nav {
     top: 0;
     right: 0;
     left: 0;
-    padding: 1rem 9%;
+    padding: 1rem 3%;
 }
 
 nav p {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     text-decoration: none;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 nav .nav-links {
@@ -41,7 +41,7 @@ nav .nav-links .menu-buttons {
     padding: 0.25rem 0.5rem;
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 nav .nav-links .menu-buttons:hover {
@@ -62,7 +62,7 @@ nav .nav-items .menu-links {
     padding: 0.25rem 0.5rem;
     border-radius: 100%;
     transition: all 0.3s ease-in-out;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 nav .nav-items .menu-links:hover {

@@ -3,11 +3,25 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     margin: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .card img {
-    width: 100%;
-    height: auto;
+  .card-image {
+    border: 1px solid orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cardimg{
+    display: block;
+    max-height: 100%;
+    max-width: 150%;
   }
   
   .card-body {

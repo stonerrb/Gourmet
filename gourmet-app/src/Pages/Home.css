@@ -1,0 +1,10 @@
+.headmenu {
+    width:100%;
+    height:100px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.container {
+    width:2500px;
+}

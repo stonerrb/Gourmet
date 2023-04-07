@@ -6,7 +6,6 @@ import Contact from '../Pages/Contact';
 import './Navbar.css';
 import Cart from "../Pages/Cart";
 import Wishlist from "../Pages/Wishlist";
-import Badge from '@mui/material/Badge';
 
 function Navbar() {
     

@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "app": "^0.1.0",
+    "react": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "scripts": "^0.1.0"
+  },
+  "name": "gourmet",
+  "description": "Food Ordering Web-App for Take-Away's ( Academic Project )",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stonerrb/Gourmet..git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stonerrb/Gourmet./issues"
+  },
+  "homepage": "https://github.com/stonerrb/Gourmet.#readme"
+}

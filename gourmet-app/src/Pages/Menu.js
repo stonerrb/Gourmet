@@ -64,7 +64,7 @@ function Menu() {
         <div className='card-container'>
             {searchResults.map((result) => (
                 <div className="card">
-                <img src={result.recipe.image} alt={result.recipe.label} />
+                <img src={result.recipe.imdwage} alt={result.recipe.label} />
                 <div className="card-body">
                   <div className="card-title">{result.recipe.label}</div>
                   <div className="card-text">{result.recipe.cuisineType}</div>
