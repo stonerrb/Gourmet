@@ -23,18 +23,13 @@ html,body,#root,.main{
 .form-container{
     display: flex;
     flex-direction: row;    
-    margin-right: 10vh;
     width: 100vh;
     height:60vh;
     z-index: 20;
     background-color:white;
-    border-width:1px;
-    border-style: solid;
-    border-radius: 10px;
-    border-color: #f50000;
     justify-content: space-around;
     padding-top: 40px;
-    box-shadow: 0 0 10px 0 #f500005a;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 .input-container{
     display: flex;
