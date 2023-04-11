@@ -6,6 +6,10 @@ import Contact from '../Pages/Contact';
 import './Navbar.css';
 import Cart from "../Pages/Cart";
 import Wishlist from "../Pages/Wishlist";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
+import { Tooltip } from '@mui/material';
+
 
 function Navbar() {
     
@@ -21,7 +25,7 @@ function Navbar() {
                     </div>
                 <div class="nav-items">
                 <Link to="/wishlist" className="menu-links" id="wishlist-icon"><i className="fa-solid fa-heart"></i></Link>
-                <Link to="/cart" className="menu-links" id="cart-icon"><i className="fa-solid fa-cart-shopping"></i></Link>
+                <Link to="/cart" className="menu-links" id="cart-icon"><Tooltip title="Cart"><Badge badgeContent={4} color="secondary"><ShoppingCartIcon/></Badge></Tooltip></Link>
                 </div>
             </nav>
                 <Routes>
