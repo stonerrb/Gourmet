@@ -1,11 +1,9 @@
 
 import React from 'react';
-import { TextField, FormControl, InputAdornment, InputLabel, OutlinedInput, IconButton, Input, Button, colors } from "@mui/material";
+import { TextField, FormControl, InputAdornment, InputLabel, IconButton, Input, Button } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "./CSS/Login.css";
-import { BorderColor } from '@mui/icons-material';
-
 
 function Login() {
     const [showPassword, setShowPassword] = React.useState(false);
