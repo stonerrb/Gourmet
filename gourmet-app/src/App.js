@@ -4,7 +4,7 @@ import Login from "./Pages/Menu";
 const App = () => {
     return (
         <div>
-            <Login />
+            <Navbar />
         </div>
     );
 };
