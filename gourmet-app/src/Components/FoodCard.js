@@ -38,7 +38,7 @@ const FoodCard = ({ item }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card>
+      <Card item xs={12} md={8} lg={8} xl={8} >
         <CardActionArea>
           <CardMedia
             component="img"
@@ -47,7 +47,7 @@ const FoodCard = ({ item }) => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {item.name}
+              {item.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {item.description}

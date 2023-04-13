@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Link, Route, Router, Routes, Switch} from 'react-router-dom';
 import Home from '../Pages/Home';
-import Menu from '../Pages/Menu';
+import Menu2 from '../Pages/Menu2';
 import Contact from '../Pages/Contact';
 import './Navbar.css';
 import Cart from "../Pages/Cart";
@@ -30,7 +30,7 @@ function Navbar() {
             </nav>
                 <Routes>
                     <Route exact path="/" element={<Home/>} />
-                    <Route path="/menu" element={<Menu/>} />
+                    <Route path="/menu" element={<Menu2/>} />
                     <Route path="/contact" element={<Contact/>} />
                     <Route path="/wishlist" element={<Wishlist/>} />
                     <Route path="/cart" element={<Cart/>} />
