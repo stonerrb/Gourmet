@@ -1,7 +1,5 @@
 import React from 'react';
-import Login from "./Pages/Login";
-import Navbar from "./Components/Navbar";
-
+import Login from "./Pages/Menu";
 
 const App = () => {
     return (
