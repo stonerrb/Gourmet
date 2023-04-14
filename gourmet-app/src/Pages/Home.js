@@ -1,13 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Home = () => {
   return (
     <div className="headmenu">
-    <div className="container">
-      <RenderCards />
-      </div>
+      <div className="container">{/* <RenderCards /> */}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
