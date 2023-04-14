@@ -23,6 +23,7 @@ function Login() {
     const signupValues = {
         name: '',
         email: '',
+        number: '',
         password: '',
     };
     const [lvalue, setLValue] = useState(loginValues);
@@ -70,6 +71,7 @@ function Login() {
                         <div className="input-container">
                             <TextField sx={{ m: 1, width: '25ch' }} className="input" id="standard-basic" label="Name" variant="standard" value={svalue.name} onChange={(e) => setSValue({...svalue, name: e.target.value})} />
                             <TextField sx={{ m: 1, width: '25ch' }} className="input" id="standard-basic" label="Email" variant="standard" value={svalue.email} onChange={(e) => setSValue({...svalue, email: e.target.value})}/>
+                            <TextField sx={{ m: 1, width: '25ch' }} className="input" id="standard-basic" label="Phone No." variant="standard" value={svalue.number} onChange={(e) => setSValue({...svalue, number: e.target.value})}/>
                             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                                 <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
