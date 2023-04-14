@@ -1,7 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import FoodCard from "../Components/FoodCard";
 const Wishlist = () => {
-<<<<<<< HEAD
   return (
     <Container lg={1}>
       <Grid container spacing={2} sx={{ m: "90px" }}>
@@ -21,16 +20,3 @@ const Wishlist = () => {
 };
 
 export default Wishlist;
-=======
-    return (
-        <div>
-            <h1>Wishlist</h1>
-            <FoodCard>
-                <div className='card-image'>
-                    <img className='cardimg' src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"></img>
-                    </div>
-            </FoodCard>
-        </div>
-    );
-}
->>>>>>> 1215ac6aaabda61519d0b045778ed0510ea829a8
