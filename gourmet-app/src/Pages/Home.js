@@ -67,7 +67,7 @@ export default function MediaCard() {
   return (
     <div className="headmenu">
     <div className="container">
-      <RenderCards />
+      <RenderCards/>
       </div>
     </div>
   );

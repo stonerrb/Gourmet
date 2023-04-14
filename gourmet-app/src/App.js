@@ -1,10 +1,10 @@
 import React from 'react';
-import Login from "./Pages/Menu";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar/>
         </div>
     );
 };
