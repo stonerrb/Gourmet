@@ -44,7 +44,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-backend": "npm install --save-dev nodemon",
-    "dev": "nodemon index.js"
+    "dev": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": [
