@@ -43,17 +43,20 @@ function Login() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    const { name, email, password, phone_number } = svalue;
+
     console.log("signup");
     const res = await fetch("/profile/signup", {
-      meathod: "POST",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: svalue.name,
-        email: svalue.email,
-        password: svalue.password,
-        phone_number: svalue.phone_number,
+        name,
+        email,
+        password,
+        phone_number,
       }),
     });
 
@@ -65,6 +68,33 @@ function Login() {
       window.alert("Registration Successful!");
       console.log("Registration Successful");
       navigate("/login");
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const { email, password } = lvalue;
+
+    console.log("login");
+    const res = await fetch("/profile/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+    if (res.status === 600 || !data) {
+      window.alert("Not able to Login, Please try again");
+      console.log("Login err");
+    } else {
+      console.log("User Logged In");
+      navigate("/home");
     }
   };
 
@@ -113,6 +143,7 @@ function Login() {
               </FormControl>
               <Button
                 variant="outlined"
+                onClick={handleLogin}
                 sx={{
                   color: "#f50000",
                   borderColor: "#f50000",
@@ -125,7 +156,7 @@ function Login() {
             </div>
           </form>
         </div>
-        <div className="signup-form">
+        <div className="signup-form" method="POST">
           <form id="form2">
             <h1>Sign Up</h1>
             <div className="input-container">
@@ -155,9 +186,9 @@ function Login() {
                 id="standard-basic"
                 label="Phone No."
                 variant="standard"
-                value={svalue.number}
+                value={svalue.phone_number}
                 onChange={(e) =>
-                  setSValue({ ...svalue, number: e.target.value })
+                  setSValue({ ...svalue, phone_number: e.target.value })
                 }
               />
               <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
