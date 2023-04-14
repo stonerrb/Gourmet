@@ -1,4 +1,4 @@
-// The router file
+// The router file for Profiles
 const express = require("express")
 const profile = require("../models/profile");
 const auth = require("../middleware/auth")
