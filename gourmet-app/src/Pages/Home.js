@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="headmenu">
     <div className="container">
-      {/* <RenderCards /> */}
+      <RenderCards />
       </div>
     </div>
   )
