@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const crypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+
 
 const foodItems = new mongoose.Schema({
     name:{
@@ -19,7 +17,8 @@ const foodItems = new mongoose.Schema({
         trim:true
     },
     image:{
-        type:String
+        data:Buffer,
+        contentType: String 
     },
     category:{
         type:String,
