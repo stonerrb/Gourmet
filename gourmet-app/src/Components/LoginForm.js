@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -28,6 +30,35 @@ export default function LoginForm() {
   };
 
   const [lvalue, setLValue] = useState(loginValues);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const { email, password } = lvalue;
+
+    console.log("signup");
+    const res = await fetch("/profile/signup", {
+      meathod: "POST",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+    if (res.status === 500 || !data) {
+      window.alert("Not able to Login, Please try again");
+      console.log("Login err");
+    } else {
+      console.log("User Logged In");
+      navigate("/home");
+    }
+  };
+
   return (
     <div className="login-form">
       <form id="form1">
@@ -68,7 +99,12 @@ export default function LoginForm() {
           </FormControl>
           <Button
             variant="outlined"
-            sx={{ color: "#f50000", borderColor: "#f50000", margin: "30px" }}
+            onClick={handleLogin}
+            sx={{
+              color: "#f50000",
+              borderColor: "#f50000",
+              margin: "30px",
+            }}
             className="btn"
           >
             Login

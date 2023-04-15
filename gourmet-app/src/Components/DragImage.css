@@ -1,0 +1,38 @@
+body {
+  /* height: 100vh; */
+  width: 100vw;
+  background-color: black;
+  margin: 0rem;
+  overflow: auto;
+}
+
+#image-track {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 1000px;
+  transform: translate(0%, -50%);
+  user-select: none;
+}
+
+#image-track > .image {
+  width: 40vmin;
+  height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+}
+
+.scrollinfo {
+  width: 40vmin;
+  max-height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+}
+
+.boxedText {
+  color: aliceblue;
+  max-height: 56vmin;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-size: 4vw;
+}
