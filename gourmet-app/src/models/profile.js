@@ -76,7 +76,7 @@ profileSchema.statics.findByCredentials = async (email,password) => {
 
     return user
 }
-
+    
 //Hash the plain password
 profileSchema.pre('save', async function (next){
     const profile = this;
