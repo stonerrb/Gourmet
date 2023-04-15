@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const crypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 const foodItems = new mongoose.Schema({
     name:{
@@ -29,4 +26,5 @@ const foodItems = new mongoose.Schema({
 })
 
 const FoodItems = mongoose.model("FoodItems", foodItems);
+
 module.exports = FoodItems;
