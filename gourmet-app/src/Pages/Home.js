@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Home = () => {
   return (
@@ -7,7 +7,7 @@ const Home = () => {
       {/* <RenderCards /> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
