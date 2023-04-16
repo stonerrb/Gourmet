@@ -26,6 +26,5 @@ const isauth = async (req,next,res) => {
     }else{
         res.json({success:false,message:'Unauthorised Access!!'})
     }
-}
 
 module.exports = isauth
