@@ -1,7 +1,7 @@
 // The router file
 const express = require("express")
 const profile = require("../models/profile");
-const auth = require("../middleware/auth")
+const isauth = require("../middleware/auth")
 
 const router = new express.Router();
 
@@ -19,7 +19,7 @@ router.post('/profile/signup',async (req,res) => {
 })
 
 //Read all profiles
-router.get('/profile/get',auth,async (req,res) => {
+router.get('/profile/get',async (req,res) => {
     try{
         const profiles = await profile.find({})
         res.send(profiles)
@@ -29,7 +29,7 @@ router.get('/profile/get',auth,async (req,res) => {
 }) 
 
 //get my profile
-router.get('/profile/me',auth,async (req,res) => {
+router.get('/profile/me',isauth,async (req,res) => {
     res.send(req.user)
 })
 
@@ -43,7 +43,7 @@ router.post('/profile/login',async (req,res) => {
     }
 })
 
-router.post('/profile/logout',auth,async (req,res,) => {
+router.post('/profile/logout',isauth,async (req,res,) => {
     try{
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -55,7 +55,7 @@ router.post('/profile/logout',auth,async (req,res,) => {
     }
 })
 
-router.post('/profile/logoutALL', auth, async (req,res,) => {
+router.post('/profile/logoutALL', isauth, async (req,res,) => {
     try{
         req.user.tokens = []
         await req.user.save()
