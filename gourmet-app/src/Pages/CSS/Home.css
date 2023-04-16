@@ -30,3 +30,12 @@
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1.3px white;
 }
+
+.home-title {
+  position: absolute;
+  top: -10;
+  left: 2%;
+  color: #ff3000;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-size: 4.5vw;
+}

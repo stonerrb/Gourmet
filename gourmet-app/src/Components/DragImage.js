@@ -62,8 +62,8 @@ const DragImage = () => {
     <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
       <div id="scrollinfo" className="scrollinfo">
         <p id="infotext" className="boxedText">
-          Drag<br></br> for a<br></br> Glance<br></br> --{">"}
-          {">"}
+          Drag<br></br> for a<br></br> Glance<br></br> {"<"}
+          {"<"}
         </p>
       </div>
       <img
