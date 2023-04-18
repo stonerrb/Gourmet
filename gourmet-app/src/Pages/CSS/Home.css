@@ -3,6 +3,7 @@
   right: 0;
   width: 70%;
   height: 130%;
+  z-index: 0;
 }
 
 .home-text > .quote {
@@ -19,7 +20,7 @@
 }
 
 .quote {
-  margin-top: 10%;
+  margin-top: 12%;
   width: 50%;
   position: absolute;
   top: 0;
@@ -35,7 +36,10 @@
   position: absolute;
   top: -10;
   left: 2%;
+  width: 100%;
   color: #ff3000;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   font-size: 4.5vw;
+  z-index: 100;
+  margin-bottom: 20px;
 }
