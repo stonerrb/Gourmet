@@ -37,4 +37,14 @@ router.post('/menu/add',async (req,res) => {
     })
 })
 
+//Get menu items
+router.get('/menu/get',async (req,res) => {
+    try{
+        const food_item = await FoodItems.findOne({});
+        res.send({food_item});
+    }catch(e){
+        res.status(404).send();
+    }
+})
+
 module.exports=router
