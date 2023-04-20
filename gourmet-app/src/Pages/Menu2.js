@@ -1,4 +1,4 @@
-import { Card, Container, Grid, TextField } from "@mui/material";
+import { Container, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import "./CSS/menu2.css";
@@ -50,6 +50,7 @@ function Menu2() {
 
   useEffect(() => {
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

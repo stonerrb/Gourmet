@@ -4,7 +4,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Menu2 from "./Pages/Menu2";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "home",
-    element: <Home />,
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "menu",
+    element: <Menu2 />,
   },
 ]);
 
