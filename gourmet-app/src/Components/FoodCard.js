@@ -12,7 +12,6 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { orange } from "@mui/material/colors";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -73,17 +72,17 @@ const FoodCard = ({ foodItems }) => {
         </CardActionArea>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <button
+            <IconButton
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
             >
               -
-            </button>
+            </IconButton>
             <Typography>{quantity}</Typography>
-            <button
+            <IconButton
               onClick={() => setQuantity(quantity + 1)}
             >
               +
-            </button>
+            </IconButton>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton

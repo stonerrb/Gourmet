@@ -1,19 +1,47 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { Badge, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import FoodCardSmall from "./FoodCardSmall";
+import Box from "@mui/material/Box";
+
+const menuPaperProps = {
+  elevation: 0,
+  sx: {
+    overflow: "visible",
+    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+    mt: 1.5,
+    "& .MuiAvatar-root": {
+      width: 32,
+      height: 32,
+      ml: -0.5,
+      mr: 1,
+    },
+    "&:before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      transform: "translateY(-50%) rotate(45deg)",
+      zIndex: 0,
+    },
+  },
+};
+
 
 function Navbar() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -22,6 +50,29 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+//add different anchor for cart
+  const [anchorE2, setAnchorE2] = React.useState(null);
+  const open2 = Boolean(anchorE2);
+  const handleClick2 = (event) => {
+    setAnchorE2(event.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchorE2(null);
+  }
+
+  const [dishes, setDishes] = useState([]);
+
+  useEffect(() => {
+    fetch("/menu/get")
+      .then((res) => res.json())
+      .then((data) => {
+        const dish = data.food_item; 
+        setDishes(dish);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
 
   return (
     <div>
@@ -39,13 +90,36 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-items">
-          <Link to="/cart" className="menu-links" id="cart-icon">
-            <Tooltip title="Cart">
-              <Badge badgeContent={4} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </Tooltip>
-          </Link>
+        <IconButton
+        aria-label="show cart items"
+        color="inherit"
+        onClick={handleClick2}
+      >
+        <Badge badgeContent={dishes.length} color="error">
+          <ShoppingCartIcon />
+        </Badge>
+      </IconButton>
+      <Menu
+        id="cart-menu"
+        anchorEl={anchorE2}
+        open={Boolean(anchorE2)}
+        onClose={handleClose2}
+        PaperProps={menuPaperProps}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        {dishes.length > 0 ? (
+          dishes.map((item, index) => (
+            <MenuItem>
+            <Box sx={{height:100,width:400}}>
+                          <FoodCardSmall foodItems={item} />
+            </Box>
+            </MenuItem>
+          ))
+        ) : (
+          <MenuItem>No items in cart</MenuItem>
+        )}
+      </Menu>
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
@@ -64,32 +138,7 @@ function Navbar() {
             open={open}
             onClose={handleClose}
             onClick={handleClose}
-            PaperProps={{
-              elevation: 0,
-              sx: {
-                overflow: "visible",
-                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                mt: 1.5,
-                "& .MuiAvatar-root": {
-                  width: 32,
-                  height: 32,
-                  ml: -0.5,
-                  mr: 1,
-                },
-                "&:before": {
-                  content: '""',
-                  display: "block",
-                  position: "absolute",
-                  top: 0,
-                  right: 14,
-                  width: 10,
-                  height: 10,
-                  bgcolor: "background.paper",
-                  transform: "translateY(-50%) rotate(45deg)",
-                  zIndex: 0,
-                },
-              },
-            }}
+            PaperProps={menuPaperProps}
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >

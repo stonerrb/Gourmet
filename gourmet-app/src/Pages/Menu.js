@@ -7,6 +7,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import FoodCard from "../Components/FoodCard";
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../Components/Navbar";
+import FoodCardSmall from "../Components/FoodCardSmall";
 
 const theme = createTheme({
   palette: {
@@ -119,7 +120,7 @@ function Menu() {
               <Grid2 container spacing={3}>
                 {dishes.map((items) => (
                   <Grid2 item xs={12} md={4} lg={4} xl={4}>
-                    <FoodCard foodItems={items}/>
+                    <FoodCardSmall foodItems={items}/>
                   </Grid2>
                 ))}
               </Grid2>
