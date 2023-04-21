@@ -1,19 +1,19 @@
 const express = require("express")
 const FoodItems = require("../models/food_items");
-const multer = require('multer')
+// const multer = require('multer')
 const router = new express.Router();
 
 // create storage
-const Storage = multer.diskStorage({
-    destination: "uploads",
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname)
-    }
-})
+// const Storage = multer.diskStorage({
+//     destination: "uploads",
+//     filename:(req,file,cb)=>{
+//         cb(null,file.originalname)
+//     }
+// })
 
-const upload = multer({
-    storage: Storage
-}).single('testImage');
+// const upload = multer({
+//     storage: Storage
+// }).single('testImage');
 
 //Create menu
 router.post('/menu/add',async (req,res) => {
@@ -40,7 +40,8 @@ router.post('/menu/add',async (req,res) => {
 //Get menu items
 router.get('/menu/get',async (req,res) => {
     try{
-        const food_item = await FoodItems.findOne({});
+        const food_item = await FoodItems.find({});
+        console.log(food_item);
         res.send({food_item});
     }catch(e){
         res.status(404).send();

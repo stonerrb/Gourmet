@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Login from "./Pages/Login";
-import Menu2 from "./Pages/Menu2";
+import Menu from "./Pages/Menu";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "menu",
-    element: <Menu2 />,
+    element: <Menu/>,
   },
 ]);
 

@@ -1,81 +1,135 @@
-import { TextField } from '@mui/material';
-import React,{useState,useEffect} from 'react'
-import { Button } from '@mui/material'; 
-import './CSS/menu.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Container, TextField } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button } from "@mui/material";
+import "./CSS/menu2.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import FoodCard from "../Components/FoodCard";
+import SearchIcon from "@mui/icons-material/Search";
+import Navbar from "../Components/Navbar";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#000000',
+      main: "#000000",
     },
     secondary: {
-      main: '#f50000',
+      main: "#f50000",
     },
     text: {
-      secondary: '#757575',
+      secondary: "#757575",
     },
   },
 });
 
 function Menu() {
-    const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [dishType, setDishType] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  
+  const [dishes, setDishes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [dishType, setDishType] = useState();
 
-    const handleSearch = async () => {
-        const API_ID = '0dc042fb';
-        const API_KEY = 'bfda809d7920d6521bcda891e4194061';
-        const response = await fetch(`https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}&q=${searchQuery}&category=generic-meals&cuisineType=indian`);
-        const data = await response.json();
-        setSearchResults(data.hits.filter(hit => hit.recipe.image)); 
-      };
 
-    const handleDishType = async (dishType) => {
-        if (dishType === selectedCategory) {
-            setSelectedCategory('');
-            setDishType('');
-        } else {
-            setSelectedCategory(dishType);
-            setDishType(dishType);
-        }
-        handleSearch();
-    };
+  useEffect(() => {
+    fetch("/menu/get")
+      .then((res) => res.json())
+      .then((data) => {
+        const dish = data.food_item; 
+        setDishes(dish);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-    useEffect(() => {
-      handleSearch();
-    }, []);
-
-    return (
-        <div className="menu-container">
-        <div className="category-container">
-            <div className="category">
-              <ThemeProvider theme={theme}>
-                <TextField variant='outlined' className="button" label='Search for a dish' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} fullWidth />
-                <Button variant='contained' color={selectedCategory === '' ? 'primary' : 'secondary'} className="button" onClick={handleSearch} fullWidth>Search</Button>
-                <Button variant='contained' color={selectedCategory === 'starters' ? 'primary' : 'secondary'} className="button" onClick={() => handleDishType('starters')} fullWidth>Breakfast</Button>
-                <Button variant='contained' color={selectedCategory === 'main course' ? 'primary' : 'secondary'} className="button" onClick={() => handleDishType('main course')} fullWidth>Main Course</Button>
-                <Button variant='contained' color={selectedCategory === 'desserts' ? 'primary' : 'secondary'} className="button" onClick={() => handleDishType('desserts')} fullWidth>Desserts</Button>
-                <Button variant='contained' color={selectedCategory === 'drinks' ? 'primary' : 'secondary'} className="button" onClick={() => handleDishType('drinks')} fullWidth>Drinks</Button>
-              </ThemeProvider>
-        </div>
-        </div>
-        <div className='card-container'>
-            {searchResults.map((result) => (
-                <div className="card">
-                <img src={result.recipe.imdwage} alt={result.recipe.label} />
-                <div className="card-body">
-                  <div className="card-title">{result.recipe.label}</div>
-                  <div className="card-text">{result.recipe.cuisineType}</div>
-                </div>
-              </div>
-            ))}
-        </div>
-
-        </div>
-
-    )
+  const handleDishType = async (dishType) => {
+    if (dishType === selectedCategory) {
+      setSelectedCategory("");
+      setDishType("");
+    } else {
+      setSelectedCategory(dishType);
+      setDishType(dishType);
     }
+  };
+
+  return (
+    <>
+    <Navbar></Navbar>
+    <div className="menu">
+      <ThemeProvider theme={theme}>
+        <Grid2 container spacing={1}>
+          <Grid2 item xs={12} md={4} lg={4} xl={4}>
+            <Container>
+              <div className="menu2">
+                <div className="menu2__search">
+                  <TextField
+                    id="outlined-basic"
+                    label="Search"
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                  />
+                  <Button >
+                    <SearchIcon />
+                  </Button>
+                </div>
+                <Button
+                  variant="contained"
+                  color={
+                    selectedCategory === "starters" ? "primary" : "secondary"
+                  }
+                  className="button"
+                  size="small"
+                >
+                  Breakfast
+                </Button>
+                <Button
+                  variant="contained"
+                  color={
+                    selectedCategory === "main course" ? "primary" : "secondary"
+                  }
+                  className="button"
+                  size="small"
+                >
+                  Main Course
+                </Button>
+                <Button
+                  variant="contained"
+                  color={
+                    selectedCategory === "desserts" ? "primary" : "secondary"
+                  }
+                  className="button"
+                  size="small"
+                >
+                  Desserts
+                </Button>
+                <Button
+                  variant="contained"
+                  color={
+                    selectedCategory === "drinks" ? "primary" : "secondary"
+                  }
+                  className="button"
+                  size="small"
+                >
+                  Drinks
+                </Button>
+              </div>
+            </Container>
+          </Grid2>
+
+          <Grid2 item xs={12} md={8} lg={8} xl={8}>
+            <Container>
+              <Grid2 container spacing={3}>
+                {dishes.map((items) => (
+                  <Grid2 item xs={12} md={4} lg={4} xl={4}>
+                    <FoodCard foodItems={items}/>
+                  </Grid2>
+                ))}
+              </Grid2>
+            </Container>
+          </Grid2>
+        </Grid2>
+      </ThemeProvider>
+    </div>
+    </>);
+  
+}
 
 export default Menu;

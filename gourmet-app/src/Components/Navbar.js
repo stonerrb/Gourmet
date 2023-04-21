@@ -28,7 +28,7 @@ function Navbar() {
       <nav>
         <p>Gourmet.</p>
         <div className="nav-links">
-          <Link to="/home" className="menu-buttons">
+          <Link to="/" className="menu-buttons">
             Home
           </Link>
           <Link to="/menu" className="menu-buttons">

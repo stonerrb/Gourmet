@@ -7,6 +7,7 @@ import {
   Typography,
   IconButton,
   Button,
+  Rating,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -57,35 +58,32 @@ const FoodCard = ({ foodItems }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card item xs={12} md={8} lg={8} xl={8}>
+      <Card item  xs={12} md={8} lg={8} xl={8}>
         <CardActionArea>
           <CardMedia component="img" height="200" image={foodItems.image} />
-          <CardContent>
+          <CardContent sx={{height:'100px'}}>
             <Typography gutterBottom variant="h5" component="h2">
-              {foodItems.title}
+              {foodItems.name}
             </Typography>
+            <Rating name="read-only" value="3" readOnly />
             <Typography variant="body2" color="textSecondary" component="p">
-              {foodItems.description}
+              {foodItems.price}
             </Typography>
           </CardContent>
         </CardActionArea>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button
-              variant="outlined"
-              sx={{ borderRadius: 28, m: 0.5 }}
+            <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
             >
               -
-            </Button>
+            </button>
             <Typography>{quantity}</Typography>
-            <Button
-              variant="outlined"
-              sx={{ borderRadius: 28, m: 0.5 }}
+            <button
               onClick={() => setQuantity(quantity + 1)}
             >
               +
-            </Button>
+            </button>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton

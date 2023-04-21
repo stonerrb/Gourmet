@@ -33,7 +33,7 @@ const Home = () => {
       <Link>
         <div className="gotomenu">
           <ThemeProvider theme={theme}>
-            <Button
+            <Link to="/menu" ><Button
               sx={{ borderRadius: 10 }}
               color={"secondary"}
               variant="contained"
@@ -41,6 +41,7 @@ const Home = () => {
             >
               Order Now
             </Button>
+            </Link>
           </ThemeProvider>
         </div>
       </Link>
