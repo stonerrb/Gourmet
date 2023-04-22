@@ -43,3 +43,19 @@
   z-index: 100;
   margin-bottom: 20px;
 }
+
+.motion-svg {
+  overflow: visible;
+  stroke: #ff3000;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.gotomenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3vw;
+  z-index: 9999;
+}

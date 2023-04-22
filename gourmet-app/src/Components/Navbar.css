@@ -1,86 +1,86 @@
 :root {
-    --primary-color: #f50000;
-    --secondary-color: #ff3000;
-    --tertiary-color: #ffffff;
+  --primary-color: #f50000;
+  --secondary-color: #ff3000;
+  --tertiary-color: #ffffff;
+  overflow-x: hidden;
 }
 
 nav {
-    background-color: rgba(0,0,0,0.1);
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding: 1rem 3%;
-    z-index: 100;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem 3%;
+  z-index: 100;
 }
 
 nav p {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    animation: fadeIn 0.3s ease-in-out;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 nav .nav-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
 }
 
 nav .nav-links .menu-buttons {
-    font-size: smaller;
-    text-decoration: none;
-    color: var(--primary-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 20px;
-    transition: all 0.3s ease-in-out;
-    animation: fadeIn 0.3s ease-in-out;
+  font-size: smaller;
+  text-decoration: none;
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 nav .nav-links .menu-buttons:hover {
-    background: var(--secondary-color);
-    color: var(--tertiary-color);
-    transform: scale(1.1);
+  background: var(--secondary-color);
+  color: var(--tertiary-color);
+  transform: scale(1.1);
 }
 
 nav .nav-links .menu-buttons.active {
-    background: var(--secondary-color);
-    color: var(--tertiary-color);
+  background: var(--secondary-color);
+  color: var(--tertiary-color);
 }
 
 nav .nav-items .menu-links {
-    text-decoration: none;
-    margin-left: 5px;
-    color: var(--primary-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 100%;
-    transition: all 0.3s ease-in-out;
-    animation: fadeIn 0.3s ease-in-out;
+  text-decoration: none;
+  margin-left: 5px;
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 100%;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-
 nav .nav-items .menu-links.active {
-    background: var(--secondary-color);
-    color: var(--tertiary-color);
+  background: var(--secondary-color);
+  color: var(--tertiary-color);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
-#wishlist-icon{
-    text-decoration: none;
-    color:red;
+#wishlist-icon {
+  text-decoration: none;
+  color: red;
 }

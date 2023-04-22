@@ -1,18 +1,6 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  IconButton,
-  Input,
-  Button,
-  colors,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { motion } from "framer-motion";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./CSS/Login.css";
 import LoginForm from "../Components/LoginForm";
 import SignupForm from "../Components/SignupForm";

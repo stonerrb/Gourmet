@@ -4,7 +4,10 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Menu from "./Pages/Menu";
+import FoodCardSmall from "./Components/FoodCardSmall";
+import Cart from "./Pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +15,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "home",
-    element: <Home />,
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "menu",
+    element: <Menu/>,
   },
 ]);
 
