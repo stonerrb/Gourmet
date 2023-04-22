@@ -1,14 +1,14 @@
-.menu{
-    margin-top: 150px;
+.menu {
+  margin-top: 150px;
 }
-.menu2{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 50vh;
-    margin-left: 100px;
+.menu2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 50vh;
+  margin-left: 10px;
 }
 
-.MuiButton-contained{
-    width: 200px;
+.MuiButton-contained {
+  width: 200px;
 }

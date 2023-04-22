@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const FoodItems = require("../models/food_items");
 // const multer = require('multer')
 const router = new express.Router();
@@ -16,36 +16,39 @@ const router = new express.Router();
 // }).single('testImage');
 
 //Create menu
-router.post('/menu/add',async (req,res) => {
-    upload(req,res,(err)=>{
-        if(err){
-            console.log(err);
-        } else {
-            const newImage = new FoodItems({
-                name: req.body.name,
-                price: req.body.price,
-                description: req.body.description,
-                category: req.body.category,    
-                image: {
-                    data: req.file.filename,
-                    contentType: 'image/png'
-                }
-            })
+router.post("/menu/add", async (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const newImage = new FoodItems({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        category: req.body.category,
+        image: {
+          data: req.file.filename,
+          contentType: "image/png",
+        },
+      });
 
-            newImage.save().then(()=> res.send("Success!")).catch((err)=> console.log(err))
-        }
-    })
-})
+      newImage
+        .save()
+        .then(() => res.send("Success!"))
+        .catch((err) => console.log(err));
+    }
+  });
+});
 
 //Get menu items
-router.get('/menu/get',async (req,res) => {
-    try{
-        const food_item = await FoodItems.find({});
-        console.log(food_item);
-        res.send({food_item});
-    }catch(e){
-        res.status(404).send();
-    }
-})
+router.get("/menu/get", async (_req, res) => {
+  try {
+    const food_item = await FoodItems.find({});
+    // console.log(food_item);
+    res.send({ food_item });
+  } catch (e) {
+    res.status(404).send();
+  }
+});
 
-module.exports=router;
+module.exports = router;

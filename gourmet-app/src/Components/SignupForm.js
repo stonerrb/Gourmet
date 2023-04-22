@@ -25,7 +25,7 @@ export default function SignupForm() {
   const signupValues = {
     name: "",
     email: "",
-    number: "",
+    phone_number: "",
     password: "",
   };
   const [svalue, setSValue] = useState(signupValues);
@@ -37,7 +37,6 @@ export default function SignupForm() {
 
     console.log("signup");
     const res = await fetch("/profile/signup", {
-      meathod: "POST",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,13 +50,15 @@ export default function SignupForm() {
     });
 
     const data = await res.json();
-    if (res.status === 500 || !data) {
+    if (res.status === 404 || !data) {
       window.alert("Sign Up Failed , Please try again");
       console.log("Sign Up err");
     } else {
       window.alert("Sign Up Successful");
       console.log("User Signed Up");
-      navigate("/home");
+      console.log(res.status);
+      console.log(data);
+      navigate("/login");
     }
   };
 
@@ -90,8 +91,10 @@ export default function SignupForm() {
             id="standard-basic"
             label="Phone No."
             variant="standard"
-            value={svalue.number}
-            onChange={(e) => setSValue({ ...svalue, number: e.target.value })}
+            value={svalue.phone_number}
+            onChange={(e) =>
+              setSValue({ ...svalue, phone_number: e.target.value })
+            }
           />
           <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
             <InputLabel htmlFor="standard-adornment-password">

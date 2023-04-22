@@ -93,25 +93,3 @@ const AnimatedTitle = () => {
 };
 
 export default AnimatedTitle;
-
-// <motion.svg
-//   width={letter.width}
-//   height={letter.height}
-//   viewBox={letter.viewBox}
-//   fill="none"
-//   xmlns="http://www.w3.org/2000/svg"
-//   index={index}
-// >
-//   <motion.path
-//     d={letter.d}
-//     stroke="#f50000"
-//     stroke-width="0.2"
-//     variants={icon}
-//     initial="hidden"
-//     animate="visible"
-//     transition={{
-//       default: { duration: 2, ease: "easeInOut" },
-//       fill: { duration: 2, ease: [1, 0, 0.8, 1] },
-//     }}
-//   />
-// </motion.svg>;
