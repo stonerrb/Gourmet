@@ -1,0 +1,25 @@
+.footer {
+    margin-top: 200px;
+    width: 100vw;
+    background-color:transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: #f50000;
+    height: 400px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .title:hover {
+    color: white;
+    text-decoration: underline;
+  }

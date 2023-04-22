@@ -104,6 +104,7 @@ const Home = () => {
       </div>
       <DragImage />
     </div>
+    
   );
 };
 
