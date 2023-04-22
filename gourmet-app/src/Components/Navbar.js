@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { Badge, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import FoodCardSmall from "./FoodCardSmall";
 import Box from "@mui/material/Box";
 
@@ -39,9 +39,7 @@ const menuPaperProps = {
   },
 };
 
-
 function Navbar() {
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -50,8 +48,8 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
-//add different anchor for cart
+
+  //add different anchor for cart
   const [anchorE2, setAnchorE2] = React.useState(null);
   const open2 = Boolean(anchorE2);
   const handleClick2 = (event) => {
@@ -59,7 +57,7 @@ function Navbar() {
   };
   const handleClose2 = () => {
     setAnchorE2(null);
-  }
+  };
 
   const [dishes, setDishes] = useState([]);
 
@@ -67,12 +65,11 @@ function Navbar() {
     fetch("/menu/get")
       .then((res) => res.json())
       .then((data) => {
-        const dish = data.food_item; 
+        const dish = data.food_item;
         setDishes(dish);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   return (
     <div>
@@ -90,36 +87,36 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-items">
-        <IconButton
-        aria-label="show cart items"
-        color="inherit"
-        onClick={handleClick2}
-      >
-        <Badge badgeContent={dishes.length} color="error">
-          <ShoppingCartIcon />
-        </Badge>
-      </IconButton>
-      <Menu
-        id="cart-menu"
-        anchorEl={anchorE2}
-        open={Boolean(anchorE2)}
-        onClose={handleClose2}
-        PaperProps={menuPaperProps}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        {dishes.length > 0 ? (
-          dishes.map((item, index) => (
-            <MenuItem>
-            <Box sx={{height:100,width:400}}>
-                          <FoodCardSmall foodItems={item} />
-            </Box>
-            </MenuItem>
-          ))
-        ) : (
-          <MenuItem>No items in cart</MenuItem>
-        )}
-      </Menu>
+          <IconButton
+            aria-label="show cart items"
+            color="inherit"
+            onClick={handleClick2}
+          >
+            <Badge badgeContent={dishes.length} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          <Menu
+            id="cart-menu"
+            anchorEl={anchorE2}
+            open={Boolean(anchorE2)}
+            onClose={handleClose2}
+            PaperProps={menuPaperProps}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          >
+            {dishes.length > 0 ? (
+              dishes.map((item, index) => (
+                <MenuItem>
+                  <Box sx={{ height: 100, width: 400 }}>
+                    <FoodCardSmall foodItems={item} />
+                  </Box>
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem>No items in cart</MenuItem>
+            )}
+          </Menu>
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
