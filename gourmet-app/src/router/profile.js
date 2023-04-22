@@ -69,7 +69,6 @@ router.post("/profile/logoutALL", isauth, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 router.post('/profile/auth',async (req,res) => {
     try{
         const token = req.split('.')[1]; //took the token and got the payload
@@ -89,7 +88,7 @@ router.post('/profile/auth',async (req,res) => {
                 break;
             }
         }
-        if(!tokenAlive){
+        if(tokenAlive){
             return res.json({success:true,message:'You are already logged in!!'})
         }else{
             return res.json({success:false,message:'Login Please!!'})
@@ -108,6 +107,3 @@ router.post('/profile/auth',async (req,res) => {
 
 
 module.exports = router
-=======
-module.exports = router;
->>>>>>> 67a76614097783faea9e8878599119f561f44726
