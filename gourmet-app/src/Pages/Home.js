@@ -5,7 +5,7 @@ import AnimatedTextWord from "../Components/AnimatedText";
 import AnimatedTitle from "../Components/AnimatedTitle";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { Button,SpeedDial,SpeedDialAction,SpeedDialIcon } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from "@mui/material/Avatar";
@@ -28,9 +28,9 @@ const theme = createTheme({
 /*eslint-enable*/
 
 const actions = [
-  { icon: <ShoppingCartIcon />, name: 'Cart'},
-  { icon: <RestaurantIcon />, name: 'Menu' },
-  { icon: <Avatar />, name: 'Profile' },
+  { icon: <ShoppingCartIcon />, name: 'Cart' ,path: '/cart'},
+  { icon: <RestaurantIcon />, name: 'Menu',path: '/menu' },
+  { icon: <Avatar />, name: 'Profile' ,path: '/profile'},
 ];
 
 const Home = () => {
@@ -55,10 +55,10 @@ const Home = () => {
         >
           {actions.map((action) => (
             <SpeedDialAction
-              key={action.name}
               icon={action.icon}
               tooltipTitle={action.name}
               tooltipOpen
+              onClick={()=>window.open(action.path)}
               FabProps={{
                 style: { color: theme.palette.secondary.main },
               }}
