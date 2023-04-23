@@ -54,11 +54,9 @@ export default function SignupForm() {
       window.alert("Sign Up Failed , Please try again");
       console.log("Sign Up err");
     } else {
-      window.alert("Sign Up Successful");
       console.log("User Signed Up");
-      console.log(res.status);
-      console.log(data);
-      navigate("/login");
+      localStorage.setItem("auth", "authenticated");
+      navigate("/auth-success");
     }
   };
 

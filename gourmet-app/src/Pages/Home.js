@@ -4,14 +4,18 @@ import "./CSS/Home.css";
 import AnimatedTextWord from "../Components/AnimatedText";
 import AnimatedTitle from "../Components/AnimatedTitle";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-import { Button,SpeedDial,SpeedDialAction,SpeedDialIcon } from "@mui/material";
+import {
+  Button,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+} from "@mui/material";
 import { Link, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-/*eslint-disable*/
 const theme = createTheme({
   palette: {
     primary: {
@@ -25,12 +29,11 @@ const theme = createTheme({
     },
   },
 });
-/*eslint-enable*/
 
 const actions = [
-  { icon: <ShoppingCartIcon />, name: 'Cart' ,path: '/cart'},
-  { icon: <RestaurantIcon />, name: 'Menu',path: '/menu' },
-  { icon: <Avatar />, name: 'Profile' ,path: '/profile'},
+  { icon: <ShoppingCartIcon />, name: "Cart", path: "/cart" },
+  { icon: <RestaurantIcon />, name: "Menu", path: "/menu" },
+  { icon: <Avatar />, name: "Profile", path: "/profile" },
 ];
 
 const Home = () => {
@@ -46,9 +49,7 @@ const Home = () => {
             bottom: 40,
             right: 30,
           }}
-          icon={
-            <SpeedDialIcon openIcon={<MenuIcon/>} />
-          }
+          icon={<SpeedDialIcon openIcon={<MenuIcon />} />}
           FabProps={{
             size: "large",
             style: { backgroundColor: theme.palette.secondary.main },
@@ -59,7 +60,7 @@ const Home = () => {
               icon={action.icon}
               tooltipTitle={action.name}
               tooltipOpen
-              onClick={()=>window.open(action.path)}
+              onClick={() => window.open(action.path)}
               FabProps={{
                 style: { color: theme.palette.secondary.main,backgroundColor: theme.palette.primary.main },
               }}
@@ -105,7 +106,6 @@ const Home = () => {
       </div>
       <DragImage />
     </div>
-    
   );
 };
 

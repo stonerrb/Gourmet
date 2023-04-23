@@ -15,25 +15,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FoodCard from "./FoodCard";
+import { theme } from "./Theme";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
-
-const theme = createTheme({
-
-    palette: {
-        primary: {
-            main: "#000000",
-        },
-        secondary: {
-            main: "#f50000",
-        },
-        text: {
-            secondary: "#757575",
-        },
-    },
-});
 
 const MenuFoodCard = ({ foodItems }) => {
     const [quantity, setQuantity] = useState(1);

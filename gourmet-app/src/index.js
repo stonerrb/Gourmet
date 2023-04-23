@@ -7,6 +7,11 @@ import App from "./App";
 import Login from "./Pages/Login";
 import Menu from "./Pages/Menu";
 import Contact from "./Pages/Contact";
+import Wishlist from "./Pages/Wishlist";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import Authenticated from "./Pages/Authenticated";
+import AuthRoute from "./Components/AuthRoute";
+import Cart from "./Pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -18,12 +23,24 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "contact-us",
-    element: <Contact />,
+    path: "contact",
+    element: <ProtectedRoute Component={Contact} />,
   },
   {
     path: "menu",
-    element: <Menu />,
+    element: <ProtectedRoute Component={Menu} />,
+  },
+  {
+    path: "wishlist",
+    element: <ProtectedRoute Component={Wishlist} />,
+  },
+  {
+    path: "auth-success",
+    element: <AuthRoute Component={Authenticated} />,
+  },
+  {
+    path: "cart",
+    element: <ProtectedRoute Component={Cart} />,
   },
 ]);
 

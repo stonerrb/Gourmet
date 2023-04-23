@@ -5,6 +5,7 @@ import "./DragImage.css";
 const DragImage = () => {
   useEffect(() => {
     const track = document.getElementById("image-track");
+    const text = document.getElementById("scrollinfo");
     const handleOnDown = (e) => (track.dataset.mouseDownAt = e.clientX);
 
     const handleOnUp = () => {
@@ -27,6 +28,16 @@ const DragImage = () => {
         );
 
       track.dataset.percentage = nextPercentage;
+
+      var rect = track.getBoundingClientRect();
+      text.removeAttribute("close");
+      if (rect.left < 100) {
+        text.removeAttribute("open");
+        text.setAttribute("close", "true");
+      } else if (rect.left >= 100) {
+        text.removeAttribute("close");
+        text.setAttribute("open", "true");
+      }
 
       track.animate(
         {

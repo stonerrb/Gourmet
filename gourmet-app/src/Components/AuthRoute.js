@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,9 +6,11 @@ const ProtectedRoute = (props) => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (!token) {
-      navigate("/login");
+    const auth = localStorage.getItem("auth");
+    if (!auth) {
+      navigate("/");
+    } else {
+      navigate("/auth-success");
     }
   }, [navigate]);
 
