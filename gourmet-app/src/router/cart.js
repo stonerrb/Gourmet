@@ -7,12 +7,36 @@ const router = new express.Router();
 
 //if a user clicks on add to cart button on a food item make a cart for that user
 router.post("/cart/AddtoCart", async (req, res) => {
-    console.log(req.body);
+
     try{
-        console.log(req.body);
         const { profile_id, foodItemID,} = req.body;
         console.log(profile_id, foodItemID);
-        const cart = Cart.addToCart(profile_id, foodItemID);
+        // if user already has a pending cart
+        const cart = await Cart.findOne({ profile_id, status: "pending" })
+
+        if (cart === null) {
+            console.log("i am here");
+            //IF NO CART IS FOUND CREATE A NEW ONE
+            cart = new Cart({
+                profile_id: profile_id,
+                food_items: [
+                  {
+                    food_item: foodItemID,
+                    quantity: quantity
+                  }
+                ]
+              });
+            console.log("i found it!!");
+        }else{
+            //check if the product is already in the cart
+            const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
+            if(existAlready){
+                cart.food_items[existAlready].quantity += quantity;
+            }else{
+                cart.food_items.push({ food_item: foodItemID, quantity });
+            }
+        }
+        await cart.save();
         res.status(200).send(cart);
     }catch(e){
         res.status(500).send(e);
@@ -54,3 +78,5 @@ router.post("/cart/checkout", async (req, res) => {
         throw new Error("Unable to checkout");
     }
 }); 
+
+module.exports = router;

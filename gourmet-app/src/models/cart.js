@@ -45,34 +45,33 @@ const CartSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model("Cart", CartSchema);
-
 // function to add to cart
-async function addToCart(profile_id, foodItemID, quantity = '1') {
-    try {
-        // if user already has a pending cart
-        let cart = await Cart.findOne({ profile_id, status: "pending" })
+// CartSchema.methods.addToCart = async function (profile_id, foodItemID, quantity = '1') {
+//     try {
+//         console.log(profile_id, foodItemID, quantity);
+//         // if user already has a pending cart
+//         let cart = await Cart.findOne({ profile_id, status: "pending" })
 
-        if (!cart) {
-            cart = new Cart({ profile_id }, { food_items: { food_item: foodItemID, quantity } });
-        }else{
-            //check if the product is already in the cart
-            const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
-            if(existAlready){
-                cart.food_items[existAlready].quantity += quantity;
-            }else{
-                cart.food_items.push({ food_item: foodItemID, quantity });
-            }
-        }
-        await cart.save();
+//         if (!cart) {
+//             cart = new Cart({ profile_id }, { food_items: { food_item: foodItemID, quantity } });
+//         }else{
+//             //check if the product is already in the cart
+//             const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
+//             if(existAlready){
+//                 cart.food_items[existAlready].quantity += quantity;
+//             }else{
+//                 cart.food_items.push({ food_item: foodItemID, quantity });
+//             }
+//         }
+//         await cart.save();
 
-        return cart;
-    }
-    catch (e) {
-        console.log(e);
-        throw new Error("Unable to add to cart");
-    }
-}
+//         return cart;
+//     }
+//     catch (e) {
+//         console.log(e);
+//         throw new Error("Unable to add to cart");
+//     }
+// }
 
 async function getCart(profile_id){
     try{
@@ -83,4 +82,8 @@ async function getCart(profile_id){
         throw new Error("Unable to get cart");
     }
 }
+
+module.exports = mongoose.model("Cart", CartSchema);
+
+
 
