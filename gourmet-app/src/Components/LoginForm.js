@@ -11,6 +11,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ export default function LoginForm() {
     });
 
     const data = await res.json();
+
     if (res.status === 500 || !data) {
       window.alert("Not able to Login, Please try again");
       console.log("Login err");
