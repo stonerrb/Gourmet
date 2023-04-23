@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from "react";
-import { Badge, IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge, Button, IconButton, Menu, MenuItem, MenuList, Typography } from "@mui/material";
+import Box from '@mui/material/Box';
+import Divider from "@mui/material/Divider";
+import CartFoodCard from "../Components/CartFoodCard";
 
 const Cart = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,34 +41,25 @@ const Cart = () => {
   };
   return (
     <React.Fragment>
-      <IconButton
-        aria-label="show cart items"
-        color="inherit"
-        onClick={handleClick}
-      >
-        <Badge badgeContent={dishes.length} color="error">
-          <ShoppingCartIcon />
-        </Badge>
-      </IconButton>
-      <Menu
-        id="cart-menu"
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
+        <MenuList disableRipple onClick={handleClose} sx={{display:'flex',alignItems:'center',height:'10px',paddingLeft:'20px'}}>Cart</MenuList>
+        <Divider />
+        <Box sx={{height:'400px', display:'flex', flexDirection:'column',overflowY:"scroll"}}>
         {dishes.length > 0 ? (
           dishes.map((item, index) => (
-            <MenuItem key={index}>
-              <Typography variant="subtitle1">{item.name}</Typography>
-              <Typography variant="subtitle2">
-                {item.quantity} x {item.price}
-              </Typography>
+            <MenuItem disableRipple>
+            <CartFoodCard key={index} foodItems={item}/>
             </MenuItem>
           ))
         ) : (
-          <MenuItem>No items in cart</MenuItem>
+          <div>No items in cart</div>
         )}
-      </Menu>
+        </Box>
+        <Divider />
+        <MenuList disableRipple onClick={handleClose} sx={{height:'30px',paddingLeft:'20px'}}>
+          <Button variant="outlined">
+            Checkout
+          </Button>
+        </MenuList>
     </React.Fragment>
   );
 };

@@ -1,0 +1,33 @@
+
+.button-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    margin-top: 10px;
+}
+.quantity-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:20px;
+    height: 20px;
+    border-radius: 50%;
+    border-width: 0;
+    color: white;
+    background-color: #f50000;
+    cursor: pointer;    
+}
+.quantity-buttons:hover{
+    background-color: white;
+    color: #f50000;
+}
+.quantity-buttons:active{
+    border: 1px solid #e47d31;
+}
+.quantity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:30px
+}
