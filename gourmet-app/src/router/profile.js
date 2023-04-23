@@ -58,7 +58,7 @@ router.post("/profile/logout", async (req, res) => {
 
     if (!user) {
       //if user not found
-      return res.json({ success: false, message: "Unauthorised Access!!" });
+      return res.status(404).send();
     }
 
     for (let tokengot of user.tokens) {
@@ -72,7 +72,10 @@ router.post("/profile/logout", async (req, res) => {
     }
 
     await user.save();
-    res.send();
+    return res.json({
+      success: true,
+      message: "You are Succesfully Logged Out!!",
+    });
   } catch (e) {
     res.status(500).send();
   }
