@@ -16,7 +16,7 @@ router.post("/profile/signup", async (req, res) => {
   } catch (e) {
     res.status(404).send(e);
   }
-}); 
+});
 
 //Read all profiles
 router.get("/profile/get", async (req, res) => {
