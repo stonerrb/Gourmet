@@ -7,9 +7,6 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../Components/Navbar";
 import FoodCardSmall from "../Components/FoodCardSmall";
-import Footer from "../Components/FooterComp";
-import Footer_Comp from "../Components/FooterComp";
-import FooterComp from "../Components/FooterComp";
 
 const theme = createTheme({
   palette: {
