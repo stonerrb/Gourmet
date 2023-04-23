@@ -34,9 +34,8 @@ export default function LoginForm() {
 
     const { email, password } = lvalue;
 
-    console.log("signup");
-    const res = await fetch("/profile/signup", {
-      meathod: "POST",
+    console.log("login");
+    const res = await fetch("/profile/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,8 +51,9 @@ export default function LoginForm() {
       window.alert("Not able to Login, Please try again");
       console.log("Login err");
     } else {
+      console.log(data);
       console.log("User Logged In");
-      navigate("/home");
+      navigate("/menu");
     }
   };
 

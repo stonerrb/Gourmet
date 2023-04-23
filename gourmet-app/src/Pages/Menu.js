@@ -6,7 +6,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../Components/Navbar";
-import MenuFoodCard from "../Components/MenuFoodCard";
+import FoodCardSmall from "../Components/FoodCardSmall";
+import Footer from "../Components/FooterComp";
+import Footer_Comp from "../Components/FooterComp";
 import FooterComp from "../Components/FooterComp";
 
 const theme = createTheme({
@@ -23,18 +25,17 @@ const theme = createTheme({
   },
 });
 
+/*eslint-disable*/
 function Menu() {
-  
   const [dishes, setDishes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
   const [dishType, setDishType] = useState();
-
 
   useEffect(() => {
     fetch("/menu/get")
       .then((res) => res.json())
       .then((data) => {
-        const dish = data.food_item; 
+        const dish = data.food_item;
         setDishes(dish);
       })
       .catch((err) => console.log(err));
@@ -49,78 +50,81 @@ function Menu() {
       setDishType(dishType);
     }
   };
+  /*eslint-enable*/
 
   return (
-    <div>
-    <Navbar></Navbar>
-    <div className="menu">
-      <ThemeProvider theme={theme}>
-        <Grid2 container spacing={1}>
-          <Grid2 item xs={12} md={4} lg={4} xl={4}>
-            <Container>
-              <div className="menu2">
-                <div className="menu2__search">
-                  <TextField
-                    id="outlined-basic"
-                    label="Search"
-                    variant="outlined"
-                    color="secondary"
+    <>
+      <Navbar></Navbar>
+      <div className="menu">
+        <ThemeProvider theme={theme}>
+          <Grid2 container spacing={1}>
+            <Grid2 item xs={1} md={4} lg={2} xl={3}>
+              <Container>
+                <div className="menu2">
+                  <div className="menu2__search">
+                    <TextField
+                      id="outlined-basic"
+                      label="Search"
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                    />
+                    <Button>
+                      <SearchIcon />
+                    </Button>
+                  </div>
+                  <Button
+                    variant="contained"
+                    color={
+                      selectedCategory === "starters" ? "primary" : "secondary"
+                    }
+                    className="button"
                     size="small"
-                  />
-                  <Button >
-                    <SearchIcon />
+                  >
+                    Breakfast
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color={
+                      selectedCategory === "main course"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    className="button"
+                    size="small"
+                  >
+                    Main Course
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color={
+                      selectedCategory === "desserts" ? "primary" : "secondary"
+                    }
+                    className="button"
+                    size="small"
+                  >
+                    Desserts
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color={
+                      selectedCategory === "drinks" ? "primary" : "secondary"
+                    }
+                    className="button"
+                    size="small"
+                  >
+                    Drinks
                   </Button>
                 </div>
-                <Button
-                  variant="contained"
-                  color={
-                    selectedCategory === "starters" ? "primary" : "secondary"
-                  }
-                  className="button"
-                  size="small"
-                >
-                  Breakfast
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    selectedCategory === "main course" ? "primary" : "secondary"
-                  }
-                  className="button"
-                  size="small"
-                >
-                  Main Course
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    selectedCategory === "desserts" ? "primary" : "secondary"
-                  }
-                  className="button"
-                  size="small"
-                >
-                  Desserts
-                </Button>
-                <Button
-                  variant="contained"
-                  color={
-                    selectedCategory === "drinks" ? "primary" : "secondary"
-                  }
-                  className="button"
-                  size="small"
-                >
-                  Drinks
-                </Button>
-              </div>
-            </Container>
-          </Grid2>
+              </Container>
+            </Grid2>
 
           <Grid2 item xs={12} md={8} lg={8} xl={8}>
             <Container>
               <Grid2 container columnSpacing={6} rowSpacing={3}>
                 {dishes.map((items) => (
-                  <Grid2 item xs={12} md={6} lg={6} xl={6} key={items._id}>
-                    <MenuFoodCard foodItems={items}/>
+                  <Grid2 item xs={12} md={6} lg={6} xl={6}>
+                    <FoodCardSmall foodItems={items}/>
                   </Grid2>
                 ))}
               </Grid2>

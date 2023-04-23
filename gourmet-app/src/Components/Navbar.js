@@ -82,6 +82,7 @@ function Navbar() {
   const handleClose2 = () => {
     setAnchorE2(null);
   };
+  };
 
   const [dishes, setDishes] = useState([]);
 
@@ -89,6 +90,7 @@ function Navbar() {
     fetch("/menu/get")
       .then((res) => res.json())
       .then((data) => {
+        const dish = data.food_item;
         const dish = data.food_item;
         setDishes(dish);
       })

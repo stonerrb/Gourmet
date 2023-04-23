@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const crypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const FoodItems = require("../models/food_items");
 
 const profileSchema = new mongoose.Schema({
   name: {
@@ -39,6 +40,14 @@ const profileSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  wishlist: [
+    {
+      food_item: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FoodItems",
+      },
+    },
+  ],
   tokens: [
     {
       token: {
@@ -52,7 +61,7 @@ const profileSchema = new mongoose.Schema({
 //create auth token for session
 profileSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString()}, process.env.JWT_SECRET,{expiresIn:'7d'});
+  const token = jwt.sign({ _id: user._id.toString()},"gourmetsecret",{expiresIn:'7d'});
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -63,7 +72,7 @@ profileSchema.methods.generateAuthToken = async function () {
 //find user to login
 profileSchema.statics.findByCredentials = async (email, password) => {
   const user = await profile.findOne({ email: email });
-
+  
   if (!user) {
     throw new Error("No user with this email");
   }

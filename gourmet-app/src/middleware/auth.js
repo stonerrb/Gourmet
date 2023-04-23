@@ -4,7 +4,7 @@ const profile = require("../models/profile");
 const isauth = async (req,next,res) => {
     if(req.headers &&  req.headers.authorisation){
         try{
-            const token = req.headers.authorisation.split('')[1]
+            const token = req.headers.authorisation.split('.')[1]
             const decode = jwt.verify(token,process.env.JWT_SECRET)
     
             const user = await profile.findbyID(decode.userID);
