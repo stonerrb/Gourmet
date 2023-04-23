@@ -37,14 +37,13 @@ const foodItems = new mongoose.Schema({
     },
 })
 
-// a method which changes rating dynamically..
-// foodItems.methods.changeRating = async function(rating){
-//     const foodItem = this;
-//     foodItem.rating = rating;
-//     await foodItem.save();
-//     return foodItem;
-// }
-
+// a method which changes rating cumilitively   
+foodItems.methods.changeRating = async function (rating) {
+    const foodItem = this;
+    foodItem.rating = (foodItem.rating + rating)/2;
+    await foodItem.save();
+    return foodItem;
+}
 
 const FoodItems = mongoose.model("FoodItems", foodItems);
 module.exports = FoodItems;

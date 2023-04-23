@@ -51,4 +51,19 @@ router.get("/menu/get", async (_req, res) => {
   }
 });
 
+//add ratign to a food item
+router.post("/menu/rating", async (req, res) => {
+  try {
+    const { foodItemID, rating } = req.body;
+    const foodItem = await FoodItems.findById(foodItemID);
+    if (!foodItem) {
+      throw new Error("No food item found");
+    }
+    foodItem.rating.changeRating(rating);
+    res.status(200).send(foodItem);
+  } catch (e) {
+    console.log(e);
+    throw new Error("Unable to add rating");
+  }
+});
 module.exports = router;
