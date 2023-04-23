@@ -1,16 +1,18 @@
-const cart = require("../models/cart");
 const Cart = require("../models/cart");
 const FoodItems = require("../models/food_items");
 const Profile = require("../models/profile");
 const express = require("express");
 
-const router = express.Router();
+const router = new express.Router();
 
 //if a user clicks on add to cart button on a food item make a cart for that user
-router.post("/cart", async (req, res) => {
+router.post("/cart/AddtoCart", async (req, res) => {
+    console.log(req.body);
     try{
-        const { profile_id, foodItemID, quantity } = req.body;
-        const cart = addToCart(profile_id, foodItemID, quantity);
+        console.log(req.body);
+        const { profile_id, foodItemID,} = req.body;
+        console.log(profile_id, foodItemID);
+        const cart = Cart.addToCart(profile_id, foodItemID);
         res.status(200).send(cart);
     }catch(e){
         res.status(500).send(e);

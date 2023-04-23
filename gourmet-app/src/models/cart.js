@@ -51,20 +51,19 @@ module.exports = mongoose.model("Cart", CartSchema);
 async function addToCart(profile_id, foodItemID, quantity = '1') {
     try {
         // if user already has a pending cart
-        let cart = await Cart.findOne({ profile_id, status: "pending" }).populate("food_items.food_item");
+        let cart = await Cart.findOne({ profile_id, status: "pending" })
 
         if (!cart) {
-            cart = new Cart({ profile_id }, { food_items: [] });
-        } // new cart
-
-        //check if the product is already in the cart
-        const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
-        if(existAlready){
-            cart.food_items[existAlready].quantity += quantity;
+            cart = new Cart({ profile_id }, { food_items: { food_item: foodItemID, quantity } });
         }else{
-            cart.food_items.push({ food_item: foodItemID, quantity });
+            //check if the product is already in the cart
+            const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
+            if(existAlready){
+                cart.food_items[existAlready].quantity += quantity;
+            }else{
+                cart.food_items.push({ food_item: foodItemID, quantity });
+            }
         }
-
         await cart.save();
 
         return cart;

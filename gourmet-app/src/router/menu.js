@@ -16,28 +16,48 @@ const router = new express.Router();
 // }).single('testImage');
 
 //Create menu
-router.post("/menu/add", async (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const newImage = new FoodItems({
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description,
-        category: req.body.category,
-        image: {
-          data: req.file.filename,
-          contentType: "image/png",
-        },
-      });
+// router.post("/menu/add", async (req, res) => {
+//   upload(req, res, (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       const newImage = new FoodItems({
+//         name: req.body.name,
+//         price: req.body.price,
+//         description: req.body.description,
+//         category: req.body.category,
+//         image: {
+//           data: req.file.filename,
+//           contentType: "image/png",
+//         },
+//       });
 
-      newImage
-        .save()
-        .then(() => res.send("Success!"))
-        .catch((err) => console.log(err));
-    }
-  });
+//       newImage
+//         .save()
+//         .then(() => res.send("Success!"))
+//         .catch((err) => console.log(err));
+//     }
+//   });
+// });
+
+//add a food item
+router.post("/menu/add/foodItem", async (req, res) => {
+  try {
+    const { name,price,description,image,cuisine,time_to_prepare } = req.body;
+    const foodItem = new FoodItems({
+      name,
+      price,
+      description,
+      image,
+      cuisine,
+      time_to_prepare
+    });
+    await foodItem.save();
+    res.status(200).send(foodItem);
+  } catch (e) {
+    console.log(e);
+    throw new Error("Unable to add food item");
+  }
 });
 
 //Get menu items
@@ -59,7 +79,7 @@ router.post("/menu/rating", async (req, res) => {
     if (!foodItem) {
       throw new Error("No food item found");
     }
-    foodItem.rating.changeRating(rating);
+    foodItem.changeRating(rating);
     res.status(200).send(foodItem);
   } catch (e) {
     console.log(e);
