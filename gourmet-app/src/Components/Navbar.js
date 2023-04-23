@@ -61,8 +61,11 @@ const cartPaperProps = {
 
 
 function Navbar() {
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [anchorE2, setAnchorE2] = useState(null);
+  const open2 = Boolean(anchorE2);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,112 +75,107 @@ function Navbar() {
     setAnchorEl(null);
   };
 
-  const [anchorE2, setAnchorE2] = useState(null);
-  const open2 = Boolean(anchorE2);
-
   const handleClick2 = (event) => {
     setAnchorE2(event.currentTarget);
   };
-
   const handleClose2 = () => {
     setAnchorE2(null);
   };
-  };
 
-  const [dishes, setDishes] = useState([]);
 
-  useEffect(() => {
-    fetch("/menu/get")
-      .then((res) => res.json())
-      .then((data) => {
-        const dish = data.food_item;
-        const dish = data.food_item;
-        setDishes(dish);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+const [dishes, setDishes] = useState([]);
 
-  return (
-    <div>
-      <nav>
-        <p>Gourmet.</p>
-        <div className="nav-links">
-          <Link to="/" className="menu-buttons">
-            Home
-          </Link>
-          <Link to="/menu" className="menu-buttons">
-            Menu
-          </Link>
-          <Link to="/contact" className="menu-buttons">
-            Contact
-          </Link>
-        </div>
-        <div className="nav-items">
-          <IconButton
-            aria-label="show cart items"
-            color="inherit"
-            onClick={handleClick2}
-          >
-            <Badge badgeContent={dishes.length} color="error">
-              <ShoppingCartIcon />
-            </Badge>
+useEffect(() => {
+  fetch("/menu/get")
+    .then((res) => res.json())
+    .then((data) => {
+      const dish = data.food_item;
+      setDishes(dish);
+    })
+    .catch((err) => console.log(err));
+}, []);
+
+return (
+  <div>
+    <nav>
+      <p>Gourmet.</p>
+      <div className="nav-links">
+        <Link to="/" className="menu-buttons">
+          Home
+        </Link>
+        <Link to="/menu" className="menu-buttons">
+          Menu
+        </Link>
+        <Link to="/contact" className="menu-buttons">
+          Contact
+        </Link>
+      </div>
+      <div className="nav-items">
+        <IconButton
+          aria-label="show cart items"
+          color="inherit"
+          onClick={handleClick2}
+        >
+          <Badge badgeContent={dishes.length} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <Menu
+          id="cart-menu"
+          anchorEl={anchorE2}
+          open={Boolean(anchorE2)}
+          onClose={handleClose2}
+          PaperProps={cartPaperProps}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          getContentAnchorEl={null}
+        >
+          <Cart />
+        </Menu>
+        <Tooltip title="Account settings">
+          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
           </IconButton>
-          <Menu
-            id="cart-menu"
-            anchorEl={anchorE2}
-            open={Boolean(anchorE2)}
-            onClose={handleClose2}
-            PaperProps={cartPaperProps}
-            transformOrigin={{ horizontal: "right", vertical: "top" }}
-            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            getContentAnchorEl={null}
-          >
-            <Cart />
-          </Menu>
-          <Tooltip title="Account settings">
-            <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-              <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-            </IconButton>
-          </Tooltip>
-          <Menu
-            anchorEl={anchorEl}
-            id="account-menu"
-            open={open}
-            onClose={handleClose}
-            onClick={handleClose}
-            PaperProps={profilePaperProps}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <MenuItem onClick={handleClose}>
-              <Avatar /> Name
-            </MenuItem>
-            <Divider />
-            <MenuItem onClick={handleClose}>
-              <Link to="/wishlist" className="menu-links" id="wishlist-icon">
-                <ListItemIcon>
-                  <i className="fa-solid fa-heart"></i>
-                </ListItemIcon>
-                Wishlist
-              </Link>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
+        </Tooltip>
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          PaperProps={profilePaperProps}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Avatar /> Name
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleClose}>
+            <Link to="/wishlist" className="menu-links" id="wishlist-icon">
               <ListItemIcon>
-                <Settings fontSize="small" />
+                <i className="fa-solid fa-heart"></i>
               </ListItemIcon>
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <Logout fontSize="small" />
-              </ListItemIcon>
-              Logout
-            </MenuItem>
-          </Menu>
-        </div>
-      </nav>
-    </div>
-  );
+              Wishlist
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Menu>
+      </div>
+    </nav>
+  </div>
+);
 }
 
 export default Navbar;
