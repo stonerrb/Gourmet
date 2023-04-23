@@ -33,7 +33,7 @@ const theme = createTheme({
     },
 });
 
-const FoodCardSmall = ({ foodItems }) => {
+const MenuFoodCard = ({ foodItems }) => {
     const [quantity, setQuantity] = useState(1);
     const [wishlist, setWishlist] = useState(false);
 
@@ -61,6 +61,6 @@ const FoodCardSmall = ({ foodItems }) => {
             </Card>
         </ThemeProvider>
     );
-};
+}; 
 
-export default FoodCardSmall;
+export default MenuFoodCard;

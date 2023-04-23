@@ -4,12 +4,9 @@ import { Button } from "@mui/material";
 import "./CSS/menu2.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import FoodCard from "../Components/FoodCard";
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../Components/Navbar";
-import FoodCardSmall from "../Components/FoodCardSmall";
-import Footer from "../Components/FooterComp";
-import Footer_Comp from "../Components/FooterComp";
+import MenuFoodCard from "../Components/MenuFoodCard";
 import FooterComp from "../Components/FooterComp";
 
 const theme = createTheme({
@@ -122,8 +119,8 @@ function Menu() {
             <Container>
               <Grid2 container columnSpacing={6} rowSpacing={3}>
                 {dishes.map((items) => (
-                  <Grid2 item xs={12} md={6} lg={6} xl={6}>
-                    <FoodCardSmall foodItems={items}/>
+                  <Grid2 item xs={12} md={6} lg={6} xl={6} key={items._id}>
+                    <MenuFoodCard foodItems={items}/>
                   </Grid2>
                 ))}
               </Grid2>

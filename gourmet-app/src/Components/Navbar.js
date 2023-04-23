@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -9,10 +9,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Badge, IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import FoodCardSmall from "./FoodCardSmall";
-import Box from "@mui/material/Box";
+import Cart from "../Pages/Cart";
 
-const menuPaperProps = {
+const profilePaperProps = {
   elevation: 0,
   sx: {
     overflow: "visible",
@@ -38,28 +37,51 @@ const menuPaperProps = {
     },
   },
 };
+const cartPaperProps = {
+  elevation: 0,
+  sx: {
+    overflow: "visible",
+    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+    mt: 1.5,
+    "&:before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 15,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      transform: "translateY(-50%) rotate(45deg)",
+      zIndex: 0,
+    },
+    width: "400px",
+  },
+};
 
 
 function Navbar() {
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
-//add different anchor for cart
-  const [anchorE2, setAnchorE2] = React.useState(null);
+
+  const [anchorE2, setAnchorE2] = useState(null);
   const open2 = Boolean(anchorE2);
+
   const handleClick2 = (event) => {
     setAnchorE2(event.currentTarget);
   };
+
   const handleClose2 = () => {
     setAnchorE2(null);
-  }
+  };
 
   const [dishes, setDishes] = useState([]);
 
@@ -67,12 +89,11 @@ function Navbar() {
     fetch("/menu/get")
       .then((res) => res.json())
       .then((data) => {
-        const dish = data.food_item; 
+        const dish = data.food_item;
         setDishes(dish);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   return (
     <div>
@@ -90,45 +111,29 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-items">
-        <IconButton
-        aria-label="show cart items"
-        color="inherit"
-        onClick={handleClick2}
-      >
-        <Badge badgeContent={dishes.length} color="error">
-          <ShoppingCartIcon />
-        </Badge>
-      </IconButton>
-      <Menu
-        id="cart-menu"
-        anchorEl={anchorE2}
-        open={Boolean(anchorE2)}
-        onClose={handleClose2}
-        PaperProps={menuPaperProps}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        {dishes.length > 0 ? (
-          dishes.map((item, index) => (
-            <MenuItem>
-            <Box sx={{height:100,width:400}}>
-                          <FoodCardSmall foodItems={item} />
-            </Box>
-            </MenuItem>
-          ))
-        ) : (
-          <MenuItem>No items in cart</MenuItem>
-        )}
-      </Menu>
+          <IconButton
+            aria-label="show cart items"
+            color="inherit"
+            onClick={handleClick2}
+          >
+            <Badge badgeContent={dishes.length} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          <Menu
+            id="cart-menu"
+            anchorEl={anchorE2}
+            open={Boolean(anchorE2)}
+            onClose={handleClose2}
+            PaperProps={cartPaperProps}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            getContentAnchorEl={null}
+          >
+            <Cart />
+          </Menu>
           <Tooltip title="Account settings">
-            <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
+            <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
               <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
             </IconButton>
           </Tooltip>
@@ -138,9 +143,9 @@ function Navbar() {
             open={open}
             onClose={handleClose}
             onClick={handleClose}
-            PaperProps={menuPaperProps}
-            transformOrigin={{ horizontal: "right", vertical: "top" }}
-            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            PaperProps={profilePaperProps}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <MenuItem onClick={handleClose}>
               <Avatar /> Name

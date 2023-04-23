@@ -6,8 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Login from "./Pages/Login";
 import Menu from "./Pages/Menu";
-import FoodCardSmall from "./Components/FoodCardSmall";
-import Cart from "./Pages/Cart";
 
 const router = createBrowserRouter([
   {
