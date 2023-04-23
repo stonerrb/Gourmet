@@ -25,11 +25,11 @@ const CartSchema = new mongoose.Schema({
         quantity: {
             type: Number,
             required: true,
+            default: 1,
         },
     }],
     PaymentMethod: {
         type: String,
-        required: true,
     },
     discount: {
         type: Number,
@@ -46,3 +46,42 @@ const CartSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("Cart", CartSchema);
+
+// function to add to cart
+async function addToCart(profile_id, foodItemID, quantity = '1') {
+    try {
+        // if user already has a pending cart
+        let cart = await Cart.findOne({ profile_id, status: "pending" }).populate("food_items.food_item");
+
+        if (!cart) {
+            cart = new Cart({ profile_id }, { food_items: [] });
+        } // new cart
+
+        //check if the product is already in the cart
+        const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
+        if(existAlready){
+            cart.food_items[existAlready].quantity += quantity;
+        }else{
+            cart.food_items.push({ food_item: foodItemID, quantity });
+        }
+
+        await cart.save();
+
+        return cart;
+    }
+    catch (e) {
+        console.log(e);
+        throw new Error("Unable to add to cart");
+    }
+}
+
+async function getCart(profile_id){
+    try{
+        let cart = await Cart.findOne({ profile_id, status: "completed" }).sort({created_at: -1})
+        return cart;
+    }catch(e){
+        console.log(e);
+        throw new Error("Unable to get cart");
+    }
+}
+

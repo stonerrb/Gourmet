@@ -20,12 +20,31 @@ const foodItems = new mongoose.Schema({
         data:Buffer,
         contentType: String 
     },
-    category:{
+    cuisine:{
         type:String,
         required:true,
         trim:true
-    }
+    },
+    rating:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    time_to_prepare:{   
+        type:Number,
+        required:true,
+        default:0
+    },
 })
+
+// a method which changes rating dynamically..
+// foodItems.methods.changeRating = async function(rating){
+//     const foodItem = this;
+//     foodItem.rating = rating;
+//     await foodItem.save();
+//     return foodItem;
+// }
+
 
 const FoodItems = mongoose.model("FoodItems", foodItems);
 module.exports = FoodItems;
