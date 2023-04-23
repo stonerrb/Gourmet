@@ -39,6 +39,7 @@ const Home = () => {
       <ThemeProvider theme={theme}>
         <SpeedDial
           color="secondary"
+          
           ariaLabel="SpeedDial openIcon example"
           sx={{
             position: "fixed",
@@ -60,7 +61,7 @@ const Home = () => {
               tooltipOpen
               onClick={()=>window.open(action.path)}
               FabProps={{
-                style: { color: theme.palette.secondary.main },
+                style: { color: theme.palette.secondary.main,backgroundColor: theme.palette.primary.main },
               }}
             />
           ))}

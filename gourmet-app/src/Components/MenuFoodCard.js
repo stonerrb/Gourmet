@@ -9,10 +9,12 @@ import {
     Button,
     Rating,
     Box,
+    Backdrop
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FoodCard from "./FoodCard";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -36,15 +38,22 @@ const theme = createTheme({
 const MenuFoodCard = ({ foodItems }) => {
     const [quantity, setQuantity] = useState(1);
     const [wishlist, setWishlist] = useState(false);
+    const [CardOpen, setCardOpen] = useState(false);
 
     const handleAddToWishlist = () => {
         setWishlist(!wishlist);
     };
 
+    const handleCardOpen = (event) => {
+        const backdrop = document.getElementById("backdrop");
+        if(backdrop && backdrop.contains(event.target)) return;
+        setCardOpen(!CardOpen);
+    };
+
     return (
         <ThemeProvider theme={theme}>
-            <Card sx={{ display: 'flex'}}>
-                <Box sx={{ width:'150%', display: 'flex', flexDirection: 'column' }}>
+            <Card sx={{ display: 'flex' }} onClick={handleCardOpen}>
+                <Box sx={{ width: '150%', display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h5">
                             {foodItems.name}
@@ -59,8 +68,16 @@ const MenuFoodCard = ({ foodItems }) => {
                 </Box>
                 <CardMedia component="img" image={foodItems.image} />
             </Card>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={CardOpen}
+                onClick={handleCardOpen}
+            >   <div id="backdrop">
+                <FoodCard foodItems={foodItems}/>
+                </div>
+            </Backdrop>
         </ThemeProvider>
     );
-}; 
+};
 
 export default MenuFoodCard;

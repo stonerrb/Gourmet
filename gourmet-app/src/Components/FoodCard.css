@@ -1,0 +1,70 @@
+.card{
+    width: 30vw;
+    height: 70vh;
+    cursor: pointer;
+}
+
+.bottom-buttons{
+    display: flex;
+    align-items: center;
+}
+
+.card-action{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    width:100%;
+    height:100%  
+}
+.card-content{
+  height:40%;
+  width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.bottom-buttons{
+    height: 10%;   
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+.button-group{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.button-group2{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:end;
+    font-size: 20px;
+}
+
+.quantity-buttons{
+    height: 50%;
+    width: 15%;
+    border-radius: 50%;
+}
+.quantity{
+    height: 50%;
+    width: 30%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #f50000;
+    border: #f50000 solid 1px;
+}
