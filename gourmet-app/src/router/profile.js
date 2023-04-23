@@ -68,44 +68,49 @@ router.post("/profile/logoutALL", isauth, async (req, res) => {
   }
 });
 
-router.post('/profile/auth',async (req,res) => {
-    try{
-        const token = req.body.token.split('.')[1];//took the token and got the payload 
+router.post("/profile/auth", async (req, res) => {
+  try {
+    const token = req.body.token.split(".")[1]; //took the token and got the payload
 
-        const payload = JSON.parse(Buffer.from(token, 'base64').toString('utf8')); //converted the payload to json
+    const payload = JSON.parse(Buffer.from(token, "base64").toString("utf8")); //converted the payload to json
 
-        const userId = payload._id; //got the user id from the payload
+    const userId = payload._id; //got the user id from the payload
 
-        const user = await profile.findById(userId); //found the user with the id
-        console.log(user);
+    const user = await profile.findById(userId); //found the user with the id
+    console.log(user);
 
-        if(!user) { //if user not found
-            return res.json({success:false,message:'Unauthorised Access!!'})
-        }
-        
-        let tokenAlive = false; //defaut tokenalive is false
-        for(let tokengot of user.tokens){  //looping through the tokens of the user
-            if(tokengot.token === req.body.token){   //if the token is found
-                tokenAlive = true;
-                break;
-            }
-        }
-        if(tokenAlive){
-            return res.json({success:true,message:'You are already logged in!!',user:user.name})
-        }else{
-            return res.json({success:false,message:'Login Please!!'})
-        }
+    if (!user) {
+      //if user not found
+      return res.json({ success: false, message: "Unauthorised Access!!" });
     }
-    catch(e){
-        if(e.name === 'JsonTokenError'){
-            return res.json({success:false,message:'Unauthorised Access!!'})
-        }
-        if(e.name === 'JsonExpiredError'){
-            return res.json({success:false,message:'Login Please!!'})
-        }
-        res.json({success:false,message:'Dont know error!!'})
+
+    let tokenAlive = false; //defaut tokenalive is false
+    for (let tokengot of user.tokens) {
+      //looping through the tokens of the user
+      if (tokengot.token === req.body.token) {
+        //if the token is found
+        tokenAlive = true;
+        break;
+      }
     }
-})
+    if (tokenAlive) {
+      return res.json({
+        success: true,
+        message: "You are already logged in!!",
+        user: user.name,
+      });
+    } else {
+      return res.json({ success: false, message: "Login Please!!" });
+    }
+  } catch (e) {
+    if (e.name === "JsonTokenError") {
+      return res.json({ success: false, message: "Unauthorised Access!!" });
+    }
+    if (e.name === "JsonExpiredError") {
+      return res.json({ success: false, message: "Login Please!!" });
+    }
+    res.json({ success: false, message: "Dont know error!!" });
+  }
+});
 
-
-module.exports = router
+module.exports = router;
