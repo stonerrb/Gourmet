@@ -6,7 +6,7 @@
 }
 
 nav {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.505);
   color: var(--primary-color);
   font-size: 1.3rem;
   height: 60px;
@@ -19,6 +19,7 @@ nav {
   left: 0;
   padding: 1rem 3%;
   z-index: 100;
+  backdrop-filter: blur(3px);
 }
 
 nav p {

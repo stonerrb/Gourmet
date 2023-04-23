@@ -46,12 +46,32 @@ router.post("/profile/login", async (req, res) => {
   }
 });
 
-router.post("/profile/logout", isauth, async (req, res) => {
+router.post("/profile/logout", async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token !== req.token;
-    });
-    await req.user.save();
+    const token = req.body.token.split(".")[1]; //took the token and got the payload
+
+    const payload = JSON.parse(Buffer.from(token, "base64").toString("utf8")); //converted the payload to json
+
+    const userId = payload._id; //got the user id from the payload
+
+    const user = await profile.findById(userId); //found the user with the id
+
+    if (!user) {
+      //if user not found
+      return res.json({ success: false, message: "Unauthorised Access!!" });
+    }
+
+    for (let tokengot of user.tokens) {
+      //looping through the tokens of the user
+      if (tokengot.token === req.body.token) {
+        //if the token is found
+        user.tokens = user.tokens.filter(
+          (tokens) => tokens.token !== tokengot.token
+        ); //deleting the token
+      }
+    }
+
+    await user.save();
     res.send();
   } catch (e) {
     res.status(500).send();

@@ -1,7 +1,6 @@
 body {
   /* height: 100vh; */
   width: 100vw;
-  background-color: black;
   margin: 0rem;
   overflow: auto;
 }
@@ -28,6 +27,7 @@ body {
   max-height: 56vmin;
   object-fit: cover;
   object-position: 100% center;
+  transition: width 0.5s ease-in-out;
 }
 
 .boxedText {
@@ -35,4 +35,30 @@ body {
   max-height: 56vmin;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   font-size: 4vw;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.scrollinfo[open] {
+  animation: fadein 500ms forwards;
+}
+
+.scrollinfo[close] {
+  animation: fadeout 500ms forwards;
 }

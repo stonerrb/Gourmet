@@ -1,3 +1,7 @@
+body {
+  background-color: #000000;
+}
+
 #homeBanner > .home-image {
   position: absolute;
   right: 0;

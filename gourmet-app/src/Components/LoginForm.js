@@ -48,12 +48,15 @@ export default function LoginForm() {
     });
 
     const data = await res.json();
+    const token = data.token;
+    const username = data.user.name;
 
     if (res.status === 500 || !data) {
       window.alert("Not able to Login, Please try again");
       console.log("Login err");
     } else {
-      console.log(data);
+      localStorage.setItem("username", username);
+      Cookies.set("token", token);
       console.log("User Logged In");
       navigate("/menu");
     }

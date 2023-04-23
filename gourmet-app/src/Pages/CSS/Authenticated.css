@@ -1,0 +1,90 @@
+.authBox {
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #292929;
+  border: 1px solid #ea5b08;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #d64d03;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+  color: aliceblue;
+  width: 80%;
+}
+
+:root {
+  --typewriterSpeed: 2s;
+  --typewriterCharacters: 19;
+}
+
+.authBox {
+  min-height: 10vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.authBox > h2 {
+  color: #ea5b08;
+}
+
+.verified {
+  font-size: clamp(1rem, 3vw + 1rem, 4rem);
+  position: relative;
+  font-family: "Source Code Pro", monospace;
+  position: relative;
+  width: max-content;
+}
+
+.verified::before,
+.verified::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.verified::before {
+  background: #292929;
+  animation: typewriter var(--typewriterSpeed)
+    steps(var(--typewriterCharacters)) 1s forwards;
+}
+
+.verified::after {
+  width: 0.125em;
+  background: rgb(255, 255, 255);
+  animation: typewriter var(--typewriterSpeed)
+      steps(var(--typewriterCharacters)) 1s forwards,
+    blink 750ms steps(var(--typewriterCharacters)) infinite;
+}
+
+.subtitle {
+  color: hsla(0, 0%, 100%, 0.7);
+  font-size: 2rem;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(3rem);
+  animation: fadeInUp 2s ease calc(var(--typewriterSpeed) + 2s) forwards;
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

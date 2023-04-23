@@ -2,28 +2,13 @@ import { Container, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import "./CSS/menu2.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../Components/Navbar";
 import MenuFoodCard from "../Components/MenuFoodCard";
-import Footer from "../Components/FooterComp";
-import Footer_Comp from "../Components/FooterComp";
 import FooterComp from "../Components/FooterComp";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#000000",
-    },
-    secondary: {
-      main: "#f50000",
-    },
-    text: {
-      secondary: "#757575",
-    },
-  },
-});
+import { theme } from "../Components/Theme";
 
 /*eslint-disable*/
 function Menu() {
@@ -58,7 +43,7 @@ function Menu() {
       <div className="menu">
         <ThemeProvider theme={theme}>
           <Grid2 container spacing={1}>
-            <Grid2 item xs={1} md={4} lg={2} xl={3}>
+            <Grid2 xs={1} md={4} lg={2} xl={3}>
               <Container>
                 <div className="menu2">
                   <div className="menu2__search">
@@ -80,6 +65,7 @@ function Menu() {
                     }
                     className="button"
                     size="small"
+                    onClick={() => handleDishType("starters")}
                   >
                     Breakfast
                   </Button>
@@ -92,6 +78,7 @@ function Menu() {
                     }
                     className="button"
                     size="small"
+                    onClick={() => handleDishType("main course")}
                   >
                     Main Course
                   </Button>
@@ -102,6 +89,7 @@ function Menu() {
                     }
                     className="button"
                     size="small"
+                    onClick={() => handleDishType("desserts")}
                   >
                     Desserts
                   </Button>
@@ -112,6 +100,7 @@ function Menu() {
                     }
                     className="button"
                     size="small"
+                    onClick={() => handleDishType("drinks")}
                   >
                     Drinks
                   </Button>
@@ -119,21 +108,21 @@ function Menu() {
               </Container>
             </Grid2>
 
-          <Grid2 item xs={12} md={8} lg={8} xl={8}>
-            <Container>
-              <Grid2 container columnSpacing={6} rowSpacing={3}>
-                {dishes.map((items) => (
-                  <Grid2 item xs={12} md={6} lg={6} xl={6}>
-                    <MenuFoodCard foodItems={items}/>
-                  </Grid2>
-                ))}
-              </Grid2>
-            </Container>
+            <Grid2 xs={12} md={8} lg={8} xl={8}>
+              <Container>
+                <Grid2 container columnSpacing={6} rowSpacing={3}>
+                  {dishes.map((items) => (
+                    <Grid2 xs={12} md={6} lg={6} xl={6}>
+                      <MenuFoodCard foodItems={items} />
+                    </Grid2>
+                  ))}
+                </Grid2>
+              </Container>
+            </Grid2>
           </Grid2>
-        </Grid2>
-      </ThemeProvider>
-    </div>
-    <FooterComp></FooterComp>
+        </ThemeProvider>
+      </div>
+      <FooterComp></FooterComp>
     </>
   );
 }
