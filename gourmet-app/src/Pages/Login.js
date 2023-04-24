@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import "./CSS/Login.css";
 import LoginForm from "../Components/LoginForm";
 import SignupForm from "../Components/SignupForm";
+import { theme } from "../Components/Theme";
+import { ThemeProvider } from "@mui/material";
 
 function Login() {
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -19,24 +21,26 @@ function Login() {
 
   return (
     <div className="main">
-      <div className="image">Gourmet.</div>
-      <motion.div
-        className="form-container"
-        initial="hidden"
-        animate="visible"
-        variants={variants}
-        transition={{ duration: 0.3, ease: "easeIn" }}
-      >
-        {showLoginForm ? <LoginForm /> : <SignupForm />}
-        <Button
-          sx={{ position: "absolute", bottom: "20vh" }}
-          onClick={handleSwitchForm}
+      <ThemeProvider theme={theme}>
+        <div className="login-bg">Gourmet.</div>
+        <motion.div
+          className="form-container"
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+          transition={{ duration: 0.3, ease: "easeIn" }}
         >
-          {showLoginForm
-            ? "Don't have an account? Sign up"
-            : "Already have an account? Log in"}
-        </Button>
-      </motion.div>
+          {showLoginForm ? <LoginForm /> : <SignupForm />}
+          <Button
+            sx={{ position: "absolute", bottom: "20vh" }}
+            onClick={handleSwitchForm}
+          >
+            {showLoginForm
+              ? "Don't have an account? Sign up"
+              : "Already have an account? Log in"}
+          </Button>
+        </motion.div>
+      </ThemeProvider>
     </div>
   );
 }

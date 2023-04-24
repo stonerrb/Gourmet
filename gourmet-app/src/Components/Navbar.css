@@ -85,3 +85,60 @@ nav .nav-items .menu-links.active {
   text-decoration: none;
   color: red;
 }
+
+.css-ebtisj-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
+  background-color: rgba(39, 39, 39, 0.662);
+  color: #ffffff;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  max-height: calc(100% - 96px);
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+  outline: 0;
+  overflow: visible;
+  -webkit-filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  margin-top: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.css-1vahq48-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
+  background-color: rgba(39, 39, 39, 0.662);
+  color: #ffffff;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  max-height: calc(100% - 96px);
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+  outline: 0;
+  overflow: visible;
+  -webkit-filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  margin-top: 12px;
+  width: 400px;
+  backdrop-filter: blur(5px);
+}

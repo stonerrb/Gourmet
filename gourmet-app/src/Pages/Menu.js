@@ -122,7 +122,7 @@ function Menu() {
           </Grid2>
         </ThemeProvider>
       </div>
-      <FooterComp></FooterComp>
+      <FooterComp margin="800px" />
     </>
   );
 }

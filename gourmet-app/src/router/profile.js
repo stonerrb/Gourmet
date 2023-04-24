@@ -58,7 +58,7 @@ router.post("/profile/logout", async (req, res) => {
 
     if (!user) {
       //if user not found
-      return res.json({ success: false, message: "Unauthorised Access!!" });
+      return res.status(404).send();
     }
 
     for (let tokengot of user.tokens) {
@@ -67,12 +67,15 @@ router.post("/profile/logout", async (req, res) => {
         //if the token is found
         user.tokens = user.tokens.filter(
           (tokens) => tokens.token !== tokengot.token
-        ); //deleting the token
+        ); //deleting the tokenx
       }
     }
 
     await user.save();
-    res.send();
+    return res.json({
+      success: true,
+      message: "You are Succesfully Logged Out!!",
+    });
   } catch (e) {
     res.status(500).send();
   }
