@@ -8,7 +8,6 @@ router.get("/menu/get/:cuisine", async (req, res) => {
   try {
     const cuisine = req.params.cuisine;
     const food_item = await FoodItems.find({ cuisine });
-    console.log(food_item);
     res.send({ food_item });
   } catch (e) {
     res.status(404).send();
