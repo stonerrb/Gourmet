@@ -10,35 +10,39 @@ router.post("/cart/AddtoCart", async (req, res) => {
 
     try{
         const { profile_id, foodItemID,} = req.body;
-        console.log(profile_id, foodItemID);
+
         // if user already has a pending cart
-        const cart = await Cart.findOne({ profile_id, status: "pending" })
+        let cart = await Cart.findOne({ profile_id, status: "pending" })
 
         if (cart === null) {
-            console.log("i am here");
             //IF NO CART IS FOUND CREATE A NEW ONE
             cart = new Cart({
                 profile_id: profile_id,
                 food_items: [
                   {
                     food_item: foodItemID,
-                    quantity: quantity
                   }
                 ]
               });
-            console.log("i found it!!");
         }else{
             //check if the product is already in the cart
-            const existAlready = cart.food_items.find((item) => item.food_item._id == foodItemID);
-            if(existAlready){
-                cart.food_items[existAlready].quantity += quantity;
+            const existent = cart.food_items.find((item) => item.food_item._id == foodItemID);
+
+            if(existent!==undefined){
+                var index = cart.food_items.findIndex((item) => item.food_item._id == foodItemID);
+            }
+            //find the index of the fooditem in the fooditems array with the fooditem id
+            console.log(index);
+            if(existent!==undefined){
+                cart.food_items[index].quantity += 1;
             }else{
-                cart.food_items.push({ food_item: foodItemID, quantity });
+                cart.food_items.push({ food_item: foodItemID});
             }
         }
         await cart.save();
         res.status(200).send(cart);
     }catch(e){
+        console.log(e);
         res.status(500).send(e);
     }
 });

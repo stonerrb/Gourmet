@@ -67,7 +67,7 @@ router.post("/profile/logout", async (req, res) => {
         //if the token is found
         user.tokens = user.tokens.filter(
           (tokens) => tokens.token !== tokengot.token
-        ); //deleting the token
+        ); //deleting the tokenx
       }
     }
 
