@@ -10,25 +10,14 @@ import {
   SpeedDialAction,
   SpeedDialIcon,
 } from "@mui/material";
-import { Link, Navigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#000000",
-    },
-    secondary: {
-      main: "#f50000",
-    },
-    text: {
-      secondary: "#757575",
-    },
-  },
-});
+import CardScatter from "../Components/CardScatter";
+import { theme } from "../Components/Theme";
+import FooterComp from "../Components/FooterComp";
 
 const actions = [
   { icon: <ShoppingCartIcon />, name: "Cart", path: "/cart" },
@@ -42,7 +31,6 @@ const Home = () => {
       <ThemeProvider theme={theme}>
         <SpeedDial
           color="secondary"
-          
           ariaLabel="SpeedDial openIcon example"
           sx={{
             position: "fixed",
@@ -52,7 +40,6 @@ const Home = () => {
           icon={<SpeedDialIcon openIcon={<MenuIcon />} />}
           FabProps={{
             size: "large",
-            style: { backgroundColor: theme.palette.secondary.main },
           }}
         >
           {actions.map((action) => (
@@ -61,9 +48,7 @@ const Home = () => {
               tooltipTitle={action.name}
               tooltipOpen
               onClick={() => window.open(action.path)}
-              FabProps={{
-                style: { color: theme.palette.secondary.main,backgroundColor: theme.palette.primary.main },
-              }}
+              FabProps={{}}
             />
           ))}
         </SpeedDial>
@@ -77,7 +62,6 @@ const Home = () => {
             <Link to="/menu">
               <Button
                 sx={{ borderRadius: 10 }}
-                color={"secondary"}
                 variant="contained"
                 startIcon={<RestaurantIcon />}
               >
@@ -105,6 +89,24 @@ const Home = () => {
         />
       </div>
       <DragImage />
+      <div className="home-text">
+        <h1 className="home-text-title">About Us</h1>
+        <p className="home-text-content">
+          Gourmet Takeaway is a food delivery service that provides a wide
+          variety of gourmet meals to customers. We are a team of passionate
+          foodies who are dedicated to providing the best food experience to our
+          customers. We are committed to providing the best quality food and
+          service to our customers.
+        </p>
+        <br />
+        <p className="home-text-content-2">
+          So visit our menu and order your favourite meal today!
+        </p>
+      </div>
+      <div className="scatter-cards">
+        <CardScatter />
+      </div>
+      <FooterComp />
     </div>
   );
 };
