@@ -6,13 +6,12 @@ const express = require("express");
 const router = new express.Router();
 
 //if a user clicks on add to cart button on a food item make a cart for that user
-router.post("/cart/AddtoCart", async (req, res) => {
-
+router.post("/cart/AddtoCart", async (req, res) => {   
     try{
         const { profile_id, foodItemID,} = req.body;
-
+        console.log(profile_id, foodItemID);
         // if user already has a pending cart
-        let cart = await Cart.findOne({ profile_id, status: "pending" })
+        const cart = await Cart.findOne({ profile_id, status: "pending" })
 
         if (cart === null) {
             //IF NO CART IS FOUND CREATE A NEW ONE
@@ -24,6 +23,7 @@ router.post("/cart/AddtoCart", async (req, res) => {
                   }
                 ]
               });
+            console.log("i found it!!");
         }else{
             //check if the product is already in the cart
             const existent = cart.food_items.find((item) => item.food_item._id == foodItemID);
