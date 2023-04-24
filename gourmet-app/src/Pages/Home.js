@@ -48,7 +48,6 @@ const Home = () => {
               tooltipTitle={action.name}
               tooltipOpen
               onClick={() => window.open(action.path)}
-              FabProps={{}}
             />
           ))}
         </SpeedDial>

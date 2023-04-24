@@ -12,28 +12,16 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import "./FoodCard.css";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
 
 const theme = createTheme({
-  palette: {
-    anger: createColor("#F40B27"),
-    apple: createColor("#5DBA40"),
-    steelBlue: createColor("#5C76B7"),
-    violet: createColor("#BC00A3"),
-  },
-  root: {
-    maxWidth: 345,
-    margin: "1rem",
-  },
-  media: {
-    height: 200,
-  },
-  button: {
-    margin: "0.5rem",
-  },
   palette: {
     primary: {
       main: "#000000",
@@ -50,44 +38,67 @@ const theme = createTheme({
 const FoodCard = ({ foodItems }) => {
   const [quantity, setQuantity] = useState(1);
   const [wishlist, setWishlist] = useState(false);
+  const [amount, setAmount] = useState(0);
 
   const handleAddToWishlist = () => {
     setWishlist(!wishlist);
   };
+  
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+    setAmount(foodItems.price * (quantity));
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+    handleAmount();
+  };
+  const handleAmount = () => {
+    setAmount(quantity * foodItems.price);
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
-      <Card item  xs={12} md={8} lg={8} xl={8}>
-        <CardActionArea>
-          <CardMedia component="img" height="200" image={foodItems.image} />
-          <CardContent sx={{height:'100px'}}>
-            <Typography gutterBottom variant="h5" component="h2">
+      <Card className="card" >
+        <CardActionArea className="card-action">
+          <CardMedia component="img" height='300' image={foodItems.image} sx={{height:'44%'}} />
+          <CardContent className="card-content">
+            <Typography gutterBottom variant="h5" component="h2" sx={{fontWeight:'bold',paddingBottom:'10px'}}>
               {foodItems.name}
             </Typography>
             <Rating name="read-only" value="3" readOnly />
-            <Typography variant="body2" color="textSecondary" component="p">
-              {foodItems.price}
+            <Typography gutterBottom variant="h6" component="h2" sx={{paddingTop:'10px' ,width:'90%' ,height:'48%', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+              {foodItems.description}
             </Typography>
           </CardContent>
-        </CardActionArea>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IconButton
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+        <div className="bottom-buttons">
+        <div className='button-group'>
+            <button
+              onClick={handleDecreaseQuantity}
+              className='quantity-buttons'
             >
-              -
-            </IconButton>
-            <Typography>{quantity}</Typography>
-            <IconButton
-              onClick={() => setQuantity(quantity + 1)}
+              {quantity === 1 ? <DeleteIcon /> : <RemoveIcon />}
+            </button>
+            <div className='quantity' ><span >
+              {quantity}
+            </span>
+            </div>
+            <button
+              onClick={handleIncreaseQuantity}
+              className='quantity-buttons'
             >
-              +
-            </IconButton>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
+              <AddIcon />
+            </button>
+            </div>
+          <div className="button-group2">
             <IconButton
               aria-label="add to favorites"
               onClick={handleAddToWishlist}
+              className="wishlist-button"
             >
               <FavoriteIcon color={wishlist ? "secondary" : "action"} />
             </IconButton>
@@ -96,6 +107,7 @@ const FoodCard = ({ foodItems }) => {
             </IconButton>
           </div>
         </div>
+        </CardActionArea>
       </Card>
     </ThemeProvider>
   );
