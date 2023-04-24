@@ -84,6 +84,8 @@ async function getCart(profile_id){
 }
 
 module.exports = mongoose.model("Cart", CartSchema);
+// module.exports = CartSchema.methods.addToCart;
+
 
 
 
