@@ -106,7 +106,7 @@ const Home = () => {
       <div className="scatter-cards">
         <CardScatter />
       </div>
-      <FooterComp />
+      <FooterComp margin="2100px" />
     </div>
   );
 };

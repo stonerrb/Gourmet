@@ -6,7 +6,7 @@ body {
 
 .card-groups,
 .card-group,
-.card {
+.scatterCard {
   aspect-ratio: 5 / 7;
 }
 
@@ -48,7 +48,7 @@ body {
   transition: none;
 }
 
-.card {
+.scatterCard {
   background-color: rgba(255, 255, 255, 0.05);
   position: absolute;
   transition: transform 800ms cubic-bezier(0.05, 0.43, 0.25, 0.95);
@@ -123,7 +123,7 @@ body {
   background-image: url("https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=722&q=80");
 }
 
-.card-group:hover > .card {
+.card-group:hover > .scatterCard {
   box-shadow: -2vmin 2vmin 3vmin rgba(0, 0, 0, 0.4);
 }
 
