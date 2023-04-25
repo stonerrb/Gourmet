@@ -30,6 +30,7 @@ const CartSchema = new mongoose.Schema({
     }],
     PaymentMethod: {
         type: String,
+        default: ""
     },
     discount: {
         type: Number,
