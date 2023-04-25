@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Grid, TextField, Button, Typography, Container,Paper } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../Components/Theme";
@@ -10,8 +10,39 @@ import MailIcon from '@mui/icons-material/Mail';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import FooterComp from "../Components/FooterComp";
 import OrdersCard from "../Components/OrdersCard";
+import Cookies from "js-cookie";
 
 function Profile() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("/cart/getAll", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            profile_id: Cookies.get("userid"),
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch orders");
+        }
+
+        const data = await response.json();
+        setOrders(data);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    fetchData();
+  }, []);
+  
+
   return (
     <div>
       <Navbar />
@@ -30,20 +61,13 @@ function Profile() {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <Paper sx={{padding:'20px'}} >
-            <Typography variant="h5" gutterBottom sx={{marginBottom:'10px'}}>
-              Ongoing Orders
-            </Typography>
-            <OrdersCard/>   
-          </Paper>
           <Paper sx={{padding:'20px',marginTop:'20px' ,height:'300px',overflowY:'scroll'}}>
             <Typography variant="h5" gutterBottom sx={{marginBottom:'10px'}}>
-                Past Orders
+               Orders
             </Typography>
-            <OrdersCard/>
-            <OrdersCard/>
-            <OrdersCard/>
-            <OrdersCard/>
+            {orders.map((order) => (
+              <OrdersCard key={order.id} order={order} />
+            ))}
             </Paper>
         </Grid>
       </Grid>
