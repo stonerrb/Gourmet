@@ -141,13 +141,16 @@ function Contact() {
               </Typography>
               <div className="social-icons">
                 <Link to={"https://www.facebook.com/"}>
-                  <FacebookRoundedIcon className="social-icon" />
+                  <FacebookRoundedIcon className="social-icon-facebook" />
                 </Link>
                 <Link to={"https://www.instagram.com/"}>
-                  <InstagramIcon className="social-icon" />
+                  <InstagramIcon
+                    className="social-icon-instagram"
+                    id="myPath"
+                  />
                 </Link>
                 <Link to={"https://twitter.com/"}>
-                  <TwitterIcon className="social-icon" />
+                  <TwitterIcon className="social-icon-twitter" />
                 </Link>
               </div>
             </div>
