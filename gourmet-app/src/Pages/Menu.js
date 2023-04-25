@@ -35,7 +35,11 @@ function Menu() {
       setDishType(dishType);
     }
   };
-  /*eslint-enable*/
+
+  
+  const filteredDishes = selectedCategory
+    ? dishes.filter((dish) => dish.cuisine === selectedCategory)
+    : dishes;
 
   return (
     <>
@@ -72,26 +76,26 @@ function Menu() {
                   <Button
                     variant="contained"
                     color={
-                      selectedCategory === "main course"
+                      selectedCategory === "MainCourse"
                         ? "primary"
                         : "secondary"
                     }
                     className="button"
                     size="small"
-                    onClick={() => handleDishType("main course")}
+                    onClick={() => handleDishType("MainCourse")}
                   >
                     Main Course
                   </Button>
                   <Button
                     variant="contained"
                     color={
-                      selectedCategory === "desserts" ? "primary" : "secondary"
+                      selectedCategory === "desert" ? "primary" : "secondary"
                     }
                     className="button"
                     size="small"
-                    onClick={() => handleDishType("desserts")}
+                    onClick={() => handleDishType("desert")}
                   >
-                    Desserts
+                    Deserts
                   </Button>
                   <Button
                     variant="contained"
@@ -111,7 +115,7 @@ function Menu() {
             <Grid2 xs={12} md={8} lg={8} xl={8}>
               <Container>
                 <Grid2 container columnSpacing={6} rowSpacing={3}>
-                  {dishes.map((items) => (
+                  {filteredDishes.map((items) => (
                     <Grid2 xs={12} md={6} lg={6} xl={6}>
                       <MenuFoodCard foodItems={items} />
                     </Grid2>
