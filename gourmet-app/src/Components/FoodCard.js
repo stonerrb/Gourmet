@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import "./FoodCard.css";
+import Cookies from "js-cookie";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -61,6 +62,27 @@ const FoodCard = ({ foodItems }) => {
   };
 
 
+  const profileid = Cookies.get("userid");
+
+  const AddtoCart= async(profile_id,fooditems_Id) => {
+    console.log(profile_id,fooditems_Id);
+    
+    const res = await fetch("/cart/AddtoCart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        profile_id,
+        fooditems_Id,
+      }),
+    });
+    const data = await res.json();
+  };
+
+  
+
+
   return (
     <ThemeProvider theme={theme}>
       <Card className="card" >
@@ -96,7 +118,7 @@ const FoodCard = ({ foodItems }) => {
             </div>
           <div className="button-group2">
             
-            <IconButton aria-label="add to cart">
+            <IconButton aria-label="add to cart" onClick={()=>AddtoCart(profileid,foodItems._id)}>
               <AddShoppingCartIcon sx={{width:'30px',height:'30px'}}/>
             </IconButton>
           </div>
