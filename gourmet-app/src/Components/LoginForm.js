@@ -53,13 +53,14 @@ export default function LoginForm() {
     const data = await res.json();
     const token = data.token;
     const username = data.user.name;
-
+    console.log(data.user._id);
     if (res.status === 500 || !data) {
       window.alert("Not able to Login, Please try again");
       console.log("Login err");
     } else {
       localStorage.setItem("username", username);
-      Cookies.set("token", token);
+
+      Cookies.set("token", token, { expires: 7 });
       console.log("User Logged In");
       navigate("/menu");
     }

@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("https://fonts.googleapis.com/css?family=Space Grotesk")
+    format("truetype");
+}
+
+.links-contact > .links-contact-content {
+  color: rgb(228, 129, 14);
+}
+.links-contact > .links-contact-content:hover {
+  color: rgb(255, 255, 255);
+}
+.social-icon {
+  color: rgb(228, 129, 14);
+  transform: scale(2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.map-link {
+  color: rgb(228, 57, 14);
+  margin-right: 25px;
+  margin-top: 10px;
+  font-size: 1rem;
+  transition: ease-in-out 0.3s;
+}
+.map-link:hover {
+  transition: ease-in-out 0.3s;
+  color: rgb(255, 255, 255);
+  font-size: 1.1rem;
+}
+.container-contact {
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  background-color: rgba(255, 255, 255, 0.02);
+  transform: scale(1);
+  transition: ease-in-out 0.3s;
+}
+.container-contact:hover {
+  transition: ease-in-out 0.3s;
+  transform: scale(1.01);
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  padding-bottom: 25px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom-style: solid;
+  border-bottom-color: orange;
+  border-bottom-width: 1px;
+}
+.last-contact {
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  margin-bottom: 100px;
+  background-color: rgba(255, 255, 255, 0.02);
+  transform: scale(1);
+  transition: ease-in-out 0.3s;
+}
+.last-contact:hover {
+  transition: ease-in-out 0.3s;
+  transform: scale(1.01);
+  padding: 5px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  margin-bottom: 100px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-bottom-style: solid;
+  border-bottom-color: orange;
+  border-bottom-width: 0.5px;
+}

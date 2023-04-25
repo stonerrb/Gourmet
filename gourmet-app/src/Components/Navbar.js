@@ -187,7 +187,7 @@ function Navbar() {
               sx={{}}
             >
               <MenuItem onClick={handleClose}>
-                <Avatar /> Name
+                <Avatar /> {localStorage.getItem("username")}
               </MenuItem>
               <Divider />
               <MenuItem onClick={handleClose}>

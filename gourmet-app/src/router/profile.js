@@ -11,8 +11,7 @@ router.post("/profile/signup", async (req, res) => {
 
   try {
     await profiles.save();
-    const token = profiles.generateAuthToken();
-    res.status(200).send({ profiles, token });
+    res.status(200).send({ profiles });
   } catch (e) {
     res.status(404).send(e);
   }
@@ -100,7 +99,6 @@ router.post("/profile/auth", async (req, res) => {
     const userId = payload._id; //got the user id from the payload
 
     const user = await profile.findById(userId); //found the user with the id
-    console.log(user);
 
     if (!user) {
       //if user not found

@@ -1,21 +1,42 @@
-import { Container, Grid } from "@mui/material";
-import FoodCard from "../Components/FoodCard";
+import { Grid } from "@mui/material";
+import { Card } from "@mui/material";
+import { CardContent } from "@mui/material";
+import { CardMedia } from "@mui/material";
+import { Typography } from "@mui/material";
+
+import Navbar from "../Components/Navbar";
 const Wishlist = () => {
   return (
-    <Container lg={1}>
-      <Grid container spacing={2} sx={{ m: "90px" }}>
-        <Grid item xl={3} lg={3}>
-          <FoodCard
-            foodItems={{
-              title: "Chicken Burger",
-              description: "Chicken Burger with cheese and lettuce",
-              image:
-                "https://images.unsplash.com/photo-1616486490928-8e1b0e1b2b1a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-            }}
-          />
+    <>
+      <Navbar />
+      <Grid
+        sx={{
+          marginTop: "10rem",
+        }}
+        container
+        justifyContent="center"
+      >
+        <Grid container xs={12} md={8} style={{}}>
+          <Card sx={{ maxWidth: "100%" }}>
+            <CardMedia
+              component="img"
+              height="140"
+              image="/static/images/cards/contemplative-reptile.jpg"
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Lizard
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
-    </Container>
+    </>
   );
 };
 
