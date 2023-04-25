@@ -99,14 +99,15 @@ router.post("/cart/checkout", async (req, res) => {
             throw new Error("No cart found");
         } 
         cart.status = "completed";
-        cart.PaymentMethod = paymentMethod;
+        cart.paymentMethod = paymentMethod;
         cart.discount = discount;
         cart.notes = notes;
-        
+        //643d360b16528514e6e4df27
         cart.final_price = await cart.food_items.reduce(async (accPromise, item) => {
             let acc = await accPromise;
             let foodItem = await FoodItems.findById(item.food_item.toString());
             acc = acc + foodItem.price * item.quantity;
+            return acc;
           }, Promise.resolve(0));
            
         await cart.save();
@@ -117,7 +118,18 @@ router.post("/cart/checkout", async (req, res) => {
     }
 }); 
 
-//give latest completed cart
-
+//give all completed carts 
+router.get("/cart/getAll", async (req, res) => {
+    try{
+        const { profile_id } = req.body;
+        let carts = await Cart.find({ profile_id, status: "completed" })
+        .sort({ created_at: -1 });
+        res.status(200).send(carts);
+    }
+    catch(e){
+        console.log(e);
+        throw new Error("Unable to get carts");
+    }
+});
 
 module.exports = router;
