@@ -1,6 +1,7 @@
 const FoodItems = require("../models/food_items");
 const Profile = require("../models/profile");
 const Wishlist = require('../models/wishlist')
+const  mongoose = require('mongoose')
 const express = require("express");
 
 const router = new express.Router();
@@ -39,27 +40,16 @@ router.post("/wishlist/add", async(req,res)=>{
 })
 
 router.delete('/wishlist/delete', async(req,res)=>{
-   try{
-    const wishlistItemId = req.body;
-    console.log(wishlistItemId);
-    const wishlistItem = await Wishlist.find(wishlistItemId);
-    console.log(wishlistItem);
-    if (!wishlistItem) {
-        return res.status(404).send('Wishlist item not found');
+    try {
+        const wishlistItemId = req.body;
+        console.log(wishlistItemId);
+        const wishlist = await Wishlist.findOne(wishlistItemId);
+
+        console.log(wishlist);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
       }
-    //   const index = await Wishlist.findIndex(wishlistItemId);
-    // if (index > -1) {
-    //   Wishlist.splice(index, 1);
-    //   await user.save();
-    // }
-
-    await Wishlist.findByIdAndDelete(wishlistItemId);
-
-    res.status(200).send('Wishlist item removed successfully');
-   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
-  }
 })
 
 module.exports = router;
