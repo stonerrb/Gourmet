@@ -95,16 +95,16 @@ router.get("/cart/get", async (req, res) => {
 router.post("/cart/checkout", async (req, res) => {
     try{
         const { profile_id, paymentMethod, discount, notes } = req.body;
-        const cart = await Cart.findOne({ profile_id, status: "pending" });
+        let cart = await Cart.findOne({ profile_id, status: "pending" });
         if(!cart){
             throw new Error("No cart found");
-        }
+        } 
         cart.status = "completed";
         cart.paymentMethod = paymentMethod;
         cart.discount = discount;
         cart.notes = notes;
         cart.final_price = cart.food_items.reduce((acc, item) => acc + item.food_item.price * item.quantity, 0);
-        //according to copilot ye final price bana dega <3 
+
         await cart.save();
         res.status(200).send(cart);
     }catch(e){
