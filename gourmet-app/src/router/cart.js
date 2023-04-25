@@ -9,9 +9,8 @@ const router = new express.Router();
 router.post("/cart/AddtoCart", async (req, res) => {   
     try{
         const { profile_id, foodItemID,} = req.body;
-        console.log(profile_id, foodItemID);
         // if user already has a pending cart
-        const cart = await Cart.findOne({ profile_id, status: "pending" })
+        let cart = await Cart.findOne({ profile_id, status: "pending" })
 
         if (cart === null) {
             //IF NO CART IS FOUND CREATE A NEW ONE
@@ -23,7 +22,6 @@ router.post("/cart/AddtoCart", async (req, res) => {
                   }
                 ]
               });
-            console.log("i found it!!");
         }else{
             //check if the product is already in the cart
             const existent = cart.food_items.find((item) => item.food_item._id == foodItemID);
@@ -60,6 +58,25 @@ router.get("/cart/get", async (req, res) => {
         throw new Error("Unable to get cart");
     }
 });
+
+//remove from cart
+router.post("/cart/remove", async (req, res) => {
+    try{
+        const { profile_id, foodItemID } = req.body;
+        const cart = await Cart.findOne({ profile_id, status: "pending" });
+        if(!cart){
+            throw new Error("No cart found");
+        }
+        const index = cart.food_items.findIndex((item) => item.food_item._id == foodItemID);
+        cart.food_items.splice(index, 1);
+        await cart.save();
+        res.status(200).send(cart);
+    }catch(e){
+        console.log(e);
+        throw new Error("Unable to remove from cart");
+    }
+});
+
 
 //Checkout the cart
 router.post("/cart/checkout", async (req, res) => {

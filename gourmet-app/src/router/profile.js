@@ -100,7 +100,6 @@ router.post("/profile/auth", async (req, res) => {
     const userId = payload._id; //got the user id from the payload
 
     const user = await profile.findById(userId); //found the user with the id
-    console.log(user);
 
     if (!user) {
       //if user not found
