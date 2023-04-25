@@ -114,6 +114,7 @@ function Navbar() {
       console.log("Logout err");
     } else if (data) {
       localStorage.removeItem("username");
+      Cookies.remove("userid");
       Cookies.remove("token");
       console.log("User Logged Out");
       navigate("/");
@@ -185,10 +186,10 @@ function Navbar() {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               transformOrigin={{ vertical: "top", horizontal: "right" }}
             >
-              <Link to="/profile" id="profile-link" >
-              <MenuItem onClick={handleClose}>
-                <Avatar /> {localStorage.getItem("username")}
-              </MenuItem>
+              <Link to="/profile" id="profile-link">
+                <MenuItem onClick={handleClose}>
+                  <Avatar /> {localStorage.getItem("username")}
+                </MenuItem>
               </Link>
               <Divider />
               <MenuItem onClick={handleClose}>
