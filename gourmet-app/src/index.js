@@ -12,6 +12,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import Authenticated from "./Pages/Authenticated";
 import AuthRoute from "./Components/AuthRoute";
 import Cart from "./Pages/Cart";
+import Profile from "./Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     path: "cart",
     element: <ProtectedRoute Component={Cart} />,
   },
+  {
+    path: "profile",
+    element: <ProtectedRoute Component={Profile} />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

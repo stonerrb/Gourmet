@@ -1,0 +1,35 @@
+.profile-page{
+    height: 80vh;
+    width: 100vw;
+    padding-top: 20vh;
+}
+.profile-details{
+    display: flex;
+    flex-direction: column;
+    padding: 0 3%;
+    height: 100%;
+}
+.profile-content{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
+}
+.profile-attr{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 70%;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+.icon-container{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

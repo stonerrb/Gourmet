@@ -30,7 +30,7 @@ const Cart = () => {
   const [dishType, setDishType] = useState();
 
   useEffect(() => {
-    fetch("/menu/get")
+    fetch("/cart/get")
       .then((res) => res.json())
       .then((data) => {
         const dish = data.food_item;
@@ -39,15 +39,6 @@ const Cart = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleDishType = async (dishType) => {
-    if (dishType === selectedCategory) {
-      setSelectedCategory("");
-      setDishType("");
-    } else {
-      setSelectedCategory(dishType);
-      setDishType(dishType);
-    }
-  };
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -59,7 +50,7 @@ const Cart = () => {
             alignItems: "center",
             height: "10px",
             paddingLeft: "20px",
-          }}
+          }}  
         >
           Cart
         </MenuList>

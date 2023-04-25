@@ -172,7 +172,7 @@ function Navbar() {
             </Menu>
             <Tooltip title="Account settings">
               <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}></Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -184,11 +184,12 @@ function Navbar() {
               PaperProps={profilePaperProps}
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               transformOrigin={{ vertical: "top", horizontal: "right" }}
-              sx={{}}
             >
+              <Link to="/profile" id="profile-link" >
               <MenuItem onClick={handleClose}>
                 <Avatar /> {localStorage.getItem("username")}
               </MenuItem>
+              </Link>
               <Divider />
               <MenuItem onClick={handleClose}>
                 <Link to="/wishlist" className="menu-links" id="wishlist-icon">

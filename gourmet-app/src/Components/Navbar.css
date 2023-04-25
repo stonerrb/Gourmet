@@ -85,6 +85,10 @@ nav .nav-items .menu-links.active {
   text-decoration: none;
   color: red;
 }
+#profile-link {
+  text-decoration: none;
+  color: white;
+}
 
 .css-ebtisj-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
   background-color: rgba(39, 39, 39, 0.662);
