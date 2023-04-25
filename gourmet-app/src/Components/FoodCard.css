@@ -2,13 +2,13 @@
   width: 30vw;
   height: 70vh;
   cursor: pointer;
+  position: relative;
 }
 
 .bottom-buttons {
   display: flex;
   align-items: center;
 }
-
 .card-action {
   display: flex;
   flex-direction: column;
@@ -17,11 +17,11 @@
   height: 100%;
 }
 .card-content {
+  padding: 20px;
   height: 40%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-left: 10px;
 }
 .bottom-buttons {
   height: 10%;
@@ -39,22 +39,31 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 20px;
 }
 .button-group2 {
   height: 100%;
-  width: 40%;
+  width: 10%;
+  padding-right: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
   font-size: 20px;
+  padding: 20px;
 }
 
 .quantity-buttons {
-  height: 50%;
-  width: 15%;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
+  color: white;
+  background-color: #f50000;
+  cursor: pointer;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 0;
 }
 .quantity {
   height: 50%;
@@ -67,4 +76,25 @@
   font-weight: 500;
   color: #f50000;
   border: #f50000 solid 1px;
+}
+
+.quantity-buttons:hover{
+  background-color: white;
+  color: #f50000;
+}
+.quantity-buttons:active{
+  border: 1px solid #e47d31;
+}
+
+.wishlist-button{
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -380px;
+  left: 400px;
+  z-index: 999;
+  border-radius: 50%;
+  border-width: 2px;
+  background-color: #f50000;
+  color: white;
 }

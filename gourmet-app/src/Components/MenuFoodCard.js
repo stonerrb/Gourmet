@@ -20,22 +20,32 @@ const MenuFoodCard = ({ foodItems }) => {
     setWishlist(!wishlist);
   };
 
-  const handleCardOpen = (event) => {
-    const backdrop = document.getElementById("backdrop");
-    if (backdrop && backdrop.contains(event.target)) return;
+  const handleCardOpen = () => {
     setCardOpen(!CardOpen);
+  };
+
+  const handleCardClose= (event) => {
+    if (event.target === event.currentTarget) {
+      setCardOpen(false);
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Card
-        sx={{ display: "flex" }}
+        sx={{ position:'relative',display: "flex", height: "220px" }}
         onClick={handleCardOpen}
         style={{ cursor: "pointer" }}
       >
         <Box sx={{ width: "150%", display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography component="div" variant="h5">
+            <Typography component="div" variant="h5"  sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}>
               {foodItems.name}
             </Typography>
             <Typography
@@ -43,6 +53,7 @@ const MenuFoodCard = ({ foodItems }) => {
               color="text.secondary"
               component="div"
               sx={{
+                marginTop: "10px",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
@@ -57,11 +68,8 @@ const MenuFoodCard = ({ foodItems }) => {
               color="secondary"
               component="div"
               sx={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
+                position: "absolute",
+                bottom: "20px",
               }}
               style={{ fontSize: "1.3rem" }}
             >
@@ -74,12 +82,9 @@ const MenuFoodCard = ({ foodItems }) => {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={CardOpen}
-        onClick={handleCardOpen}
+        onClick={handleCardClose}
       >
-        {" "}
-        <div id="backdrop">
           <FoodCard foodItems={foodItems} />
-        </div>
       </Backdrop>
     </ThemeProvider>
   );

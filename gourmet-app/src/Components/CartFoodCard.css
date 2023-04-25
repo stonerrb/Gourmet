@@ -1,12 +1,12 @@
 
-.button-group{
+.button-group-cart{
+    width: 40%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 30%;
-    margin-top: 10px;
+    justify-content: space-between;
+    margin-right: 40px;
 }
-.quantity-buttons{
+.quantity-buttons-cart{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,11 +18,11 @@
     background-color: #f50000;
     cursor: pointer;    
 }
-.quantity-buttons:hover{
+.quantity-buttons-cart:hover{
     background-color: white;
     color: #f50000;
 }
-.quantity-buttons:active{
+.quantity-buttons-cart:active{
     border: 1px solid #e47d31;
 }
 .quantity{
@@ -30,4 +30,15 @@
     align-items: center;
     justify-content: center;
     width:30px
+}
+
+.bottom-cart{
+    padding-left: 10px;
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    height: 40px;
+    align-items: center;
 }
