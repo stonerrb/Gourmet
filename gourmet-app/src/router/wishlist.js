@@ -39,13 +39,18 @@ router.post("/wishlist/add", async(req,res)=>{
       }
 })
 
-router.delete('/wishlist/delete', async(req,res)=>{
+router.post('/wishlist/delete', async(req,res)=>{
     try {
-        const wishlistItemId = req.body;
-        console.log(wishlistItemId);
-        const wishlist = await Wishlist.findOne(wishlistItemId);
-
+        const wishlistItemId = req.body.wishlistItemId;
+        console.log(wishlistItemId)
+        const wishlist = await Wishlist.findByIdAndDelete(wishlistItemId)
         console.log(wishlist);
+        if(wishlist === null){
+            throw new Error("No cart found");
+        }
+        return res.status(200).json({
+            message: 'Wishlist item deleted successfully'
+          });
       } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server Error' });
