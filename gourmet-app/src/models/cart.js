@@ -41,18 +41,9 @@ const CartSchema = new mongoose.Schema({
     },
     final_price: {
         type: Number,
+        default: 0
     },
 })
-
-// async function getCart(profile_id){
-//     try{
-//         let cart = await Cart.findOne({ profile_id, status: "completed" }).sort({created_at: -1})
-//         return cart;
-//     }catch(e){
-//         console.log(e);
-//         throw new Error("Unable to get cart");
-//     }
-// }
 
 module.exports = mongoose.model("Cart", CartSchema);
 

@@ -77,12 +77,11 @@ router.post("/cart/remove", async (req, res) => {
     }
 });
 
-//fetch the latest completed cart for a user
-//will give the latest cart for a user
+//give pending cart
 router.get("/cart/get", async (req, res) => {
     try{
         const { profile_id } = req.body;
-        const cart = getCart(profile_id);
+        let cart = await Cart.findOne({ profile_id, status: "pending" });
         res.status(200).send(cart);
     }
     catch(e){
@@ -103,7 +102,16 @@ router.post("/cart/checkout", async (req, res) => {
         cart.paymentMethod = paymentMethod;
         cart.discount = discount;
         cart.notes = notes;
-        cart.final_price = cart.food_items.reduce((acc, item) => acc + item.food_item.price * item.quantity, 0);
+        cart.final_price = cart.food_items.reduce((acc, item) => {
+            let foodItem = FoodItems.findById(item.food_item,(err, foodItem) => {
+                if (err) {
+                  console.error(err);
+                  return acc;
+                }});
+            console.log(foodItem)
+            acc =  acc + foodItem.price * item.quantity;
+            return acc;
+          }, 0);
 
         await cart.save();
         res.status(200).send(cart);
@@ -112,5 +120,8 @@ router.post("/cart/checkout", async (req, res) => {
         throw new Error("Unable to checkout");
     }
 }); 
+
+//give latest completed cart
+
 
 module.exports = router;
