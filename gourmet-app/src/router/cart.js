@@ -29,8 +29,8 @@ router.post("/cart/AddtoCart", async (req, res) => {
             if(existent!==undefined){
                 var index = cart.food_items.findIndex((item) => item.food_item._id == foodItemID);
             }
+
             //find the index of the fooditem in the fooditems array with the fooditem id
-            console.log(index);
             if(existent!==undefined){
                 cart.food_items[index].quantity += 1;
             }else{
@@ -42,6 +42,38 @@ router.post("/cart/AddtoCart", async (req, res) => {
     }catch(e){
         console.log(e);
         res.status(500).send(e);
+    }
+});
+
+//remove from cart
+router.post("/cart/remove", async (req, res) => {
+    try{
+        const { profile_id, foodItemID } = req.body;
+        let cart = await Cart.findOne({ profile_id, status: "pending" });
+
+        if(cart === null){
+            throw new Error("No cart found");
+        }
+
+        //check if the product is already in the cart
+        const existent = cart.food_items.find((item) => item.food_item._id == foodItemID);
+
+        //there is this item now find the index of that item
+        if(existent!==undefined){
+            var index = cart.food_items.findIndex((item) => item.food_item._id == foodItemID);
+        }
+
+        if(cart.food_items[index].quantity === 1){
+            cart.food_items.splice(index, 1);
+        }else{
+            cart.food_items[index].quantity -= 1;
+        }
+
+        await cart.save();
+        res.status(200).send(cart);
+    }catch(e){
+        console.log(e);
+        throw new Error("Unable to remove from cart");
     }
 });
 
@@ -58,25 +90,6 @@ router.get("/cart/get", async (req, res) => {
         throw new Error("Unable to get cart");
     }
 });
-
-//remove from cart
-router.post("/cart/remove", async (req, res) => {
-    try{
-        const { profile_id, foodItemID } = req.body;
-        const cart = await Cart.findOne({ profile_id, status: "pending" });
-        if(!cart){
-            throw new Error("No cart found");
-        }
-        const index = cart.food_items.findIndex((item) => item.food_item._id == foodItemID);
-        cart.food_items.splice(index, 1);
-        await cart.save();
-        res.status(200).send(cart);
-    }catch(e){
-        console.log(e);
-        throw new Error("Unable to remove from cart");
-    }
-});
-
 
 //Checkout the cart
 router.post("/cart/checkout", async (req, res) => {
