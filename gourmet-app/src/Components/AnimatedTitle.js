@@ -81,8 +81,8 @@ const AnimatedTitle = () => {
               initial="hidden"
               animate="visible"
               transition={{
-                default: { duration: 2, ease: "easeInOut" },
-                fill: { duration: 2, ease: [1, 0, 0.8, 1] },
+                default: { duration: 3, ease: "easeInOut" },
+                fill: { duration: 4, ease: [1, 0, 0.8, 1] },
               }}
             />
           </motion.svg>

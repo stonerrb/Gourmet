@@ -70,7 +70,7 @@ const FoodCard = ({ foodItems }) => {
             <Typography gutterBottom variant="h5" component="h2" sx={{fontWeight:'bold',paddingBottom:'10px'}}>
               {foodItems.name}
             </Typography>
-            <Rating name="read-only" value="3" readOnly />
+            <Rating name="read-only" value={foodItems.rating} readOnly />
             <Typography gutterBottom variant="h6" component="h2" sx={{paddingTop:'10px' ,width:'90%' ,height:'48%', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
               {foodItems.description}
             </Typography>
@@ -95,18 +95,19 @@ const FoodCard = ({ foodItems }) => {
             </button>
             </div>
           <div className="button-group2">
-            <IconButton
+            
+            <IconButton aria-label="add to cart">
+              <AddShoppingCartIcon sx={{width:'30px',height:'30px'}}/>
+            </IconButton>
+          </div>
+        </div>
+        <IconButton
               aria-label="add to favorites"
               onClick={handleAddToWishlist}
               className="wishlist-button"
             >
-              <FavoriteIcon color={wishlist ? "secondary" : "action"} />
+              <FavoriteIcon  sx={{width:'40px',height:'40px',borderWidth:'2px' }} color={wishlist ? "secondary" : "action"} />
             </IconButton>
-            <IconButton aria-label="add to cart">
-              <AddShoppingCartIcon />
-            </IconButton>
-          </div>
-        </div>
         </CardActionArea>
       </Card>
     </ThemeProvider>

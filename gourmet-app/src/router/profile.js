@@ -18,7 +18,7 @@ router.post("/profile/signup", async (req, res) => {
   }
 });
 
-//Read all profiles
+//Read all profiles (inactive)
 router.get("/profile/get", async (req, res) => {
   try {
     const profiles = await profile.find({});
@@ -28,9 +28,22 @@ router.get("/profile/get", async (req, res) => {
   }
 });
 
-//get my profile
-router.get("/profile/me", isauth, async (req, res) => {
-  res.send(req.user);
+//get my profile 
+router.get("/profile/me", async (req, res) => {
+  try{
+    const token = req.body.token.split(".")[1]; //took the token and got the payload
+
+    const payload = JSON.parse(Buffer.from(token, "base64").toString("utf8")); //converted the payload to json
+  
+    const userId = payload._id; //got the user id from the payload
+  
+    const user = await profile.findById(userId); //found the user with the id
+    
+    res.status(200).send(user);
+    
+  }catch(e){
+    res.status(500).send(e);
+  }
 });
 
 router.post("/profile/login", async (req, res) => {
@@ -100,7 +113,6 @@ router.post("/profile/auth", async (req, res) => {
     const userId = payload._id; //got the user id from the payload
 
     const user = await profile.findById(userId); //found the user with the id
-    console.log(user);
 
     if (!user) {
       //if user not found

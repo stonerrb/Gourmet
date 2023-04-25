@@ -36,44 +36,38 @@ const CartFoodCard = ({ foodItems }) => {
     <ThemeProvider theme={theme}>
       <Card
         elevation={0}
-        sx={{ display: "flex", height: "80px", width: "100%", margin: "0" }}
+        sx={{display: "flex", height: "90px", width: "100vh", margin: "0" }}
       >
         <CardMedia
-          sx={{ width: "100px" }}
+          sx={{ width: "35%" }}
           component="img"
           image={foodItems.image}
         />
         <CardContent
-          sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+          sx={{padding:0,height: "100%",width:'60%', display: "flex", flexDirection: "column" }}
         >
           <Typography
             variant=""
             component="div"
             sx={{
+              paddingLeft: "10px",
+              paddingTop: "10px",
               height: "35px",
-              width: "200px",
+              width: "80%",
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 1,
               WebkitBoxOrient: "vertical",
             }}
           >
             {foodItems.name}
           </Typography>
-          <Box
-            sx={{
-              margin: 0,
-              height: "20px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <div className="button-group">
-              <button
+          <div className="bottom-cart">
+            <div className="button-group-cart">
+            <button
                 onClick={handleDecreaseQuantity}
-                className="quantity-buttons"
+                className="quantity-buttons-cart"
               >
                 {quantity === 1 ? (
                   <DeleteIcon sx={{ height: "15px", width: "15px" }} />
@@ -81,31 +75,30 @@ const CartFoodCard = ({ foodItems }) => {
                   <RemoveIcon sx={{ height: "15px", width: "15px" }} />
                 )}
               </button>
+           
               <div className="quantity">
                 <span>{quantity}</span>
               </div>
+              
               <button
                 onClick={handleIncreaseQuantity}
-                className="quantity-buttons"
+                className="quantity-buttons-cart"
               >
                 <AddIcon sx={{ height: "15px", width: "15px" }} />
               </button>
+          
             </div>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
               sx={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
+                width: "30%",
               }}
             >
               Rs. {amount} /-
             </Typography>
-          </Box>
+          </div>
         </CardContent>
       </Card>
     </ThemeProvider>
