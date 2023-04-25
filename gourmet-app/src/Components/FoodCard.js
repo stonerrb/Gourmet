@@ -64,7 +64,7 @@ const FoodCard = ({ foodItems }) => {
   return (
     <ThemeProvider theme={theme}>
       <Card className="card" >
-        <CardActionArea className="card-action">
+        <CardActionArea className="card-action" onDoubleClick={handleAddToWishlist}>
           <CardMedia component="img" height='300' image={foodItems.image} sx={{height:'44%'}} />
           <CardContent className="card-content">
             <Typography gutterBottom variant="h5" component="h2" sx={{fontWeight:'bold',paddingBottom:'10px'}}>
@@ -81,7 +81,7 @@ const FoodCard = ({ foodItems }) => {
               onClick={handleDecreaseQuantity}
               className='quantity-buttons'
             >
-              {quantity === 1 ? <DeleteIcon /> : <RemoveIcon />}
+              <RemoveIcon sx={{}} />
             </button>
             <div className='quantity' ><span >
               {quantity}
