@@ -2,7 +2,7 @@
   margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;
-  background-color: #292929;
+  background-color: #ffffff0a;
   border: 1px solid #ea5b08;
   border-radius: 5px;
   box-shadow: 0 0 10px #d64d03;
@@ -48,7 +48,7 @@
 }
 
 .verified::before {
-  background: #292929;
+  background: #ffffff0a;
   animation: typewriter var(--typewriterSpeed)
     steps(var(--typewriterCharacters)) 1s forwards;
 }
