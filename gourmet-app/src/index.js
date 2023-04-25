@@ -46,7 +46,7 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <ProtectedRoute Component={Profile} />,
-  }
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
