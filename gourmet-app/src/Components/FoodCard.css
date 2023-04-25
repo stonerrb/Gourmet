@@ -1,5 +1,5 @@
 .card {
-  width: 30vw;
+  width: 40vw;
   height: 70vh;
   cursor: pointer;
   position: relative;
@@ -87,11 +87,11 @@
 }
 
 .wishlist-button{
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   position: absolute;
-  top: -380px;
-  left: 400px;
+  top: -550px;
+  left: 530px;
   z-index: 999;
   border-radius: 50%;
   border-width: 2px;
