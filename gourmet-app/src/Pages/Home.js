@@ -47,7 +47,7 @@ const Home = () => {
               icon={action.icon}
               tooltipTitle={action.name}
               tooltipOpen
-              onClick={() => window.open(action.path)}
+              onClick={() => (window.location.href = action.path)}
               FabProps={{}}
             />
           ))}
