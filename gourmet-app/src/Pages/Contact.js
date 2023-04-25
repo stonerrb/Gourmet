@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, TextField, Button, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../Components/Theme";
@@ -10,9 +10,34 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 function Contact() {
+  const Feedback = {
+    topic: "",
+    description: "",
+  };
+
+  const [feedback, setFeedback] = useState(Feedback);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Submit form data here
+    const username = localStorage.getItem("username");
+    const { topic, description } = feedback;
+    fetch("/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        topic,
+        description,
+        user_name: username,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          alert("Feedback Submitted");
+        }
+      });
   };
 
   return (
@@ -74,6 +99,12 @@ function Contact() {
                   label="Subject"
                   fullWidth
                   required
+                  onChange={(event) => {
+                    setFeedback({
+                      ...feedback,
+                      topic: event.target.value,
+                    });
+                  }}
                 />
                 <TextField
                   sx={{ marginBottom: "1rem" }}
@@ -82,6 +113,12 @@ function Contact() {
                   rows={4}
                   fullWidth
                   required
+                  onChange={(event) => {
+                    setFeedback({
+                      ...feedback,
+                      description: event.target.value,
+                    });
+                  }}
                 />
                 <br />
                 <Button type="submit" variant="contained" color="primary">
