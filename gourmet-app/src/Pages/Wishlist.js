@@ -15,15 +15,36 @@ const Wishlist = () => {
 
   useEffect(() => {
     const profile_id = Cookies.get("userid");
-
-    function fetchData() {
-      fetch(`/wishlist/get?profile_id=${profile_id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          const foodid = data.food_items;
-          const fooditemid = foodid.map((item) => item.food_item);
+    async function fetchData() {
+      try {
+        let profile_id = Cookies.get("userid");
+        const response = await fetch(`/cart/get?profile_id=${profile_id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
+
+        const wish = await response.json();
+        const wishlistItemData = await Promise.all(
+          wish.food_items.map(async (item) => {
+            const itemResponse = await fetch(
+              `/menu/get/cart/${item.food_item}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            const ItemData = await itemResponse.json();
+            return ItemData;
+          })
+        );
+        setWishlist(wishlistItemData);
+      } catch (e) {
+        console.error(e);
+      }
     }
     fetchData();
   }, []);
@@ -57,47 +78,55 @@ const Wishlist = () => {
             <Typography variant="h4" align="left" gutterBottom>
               User's Wishlist
             </Typography>
-            <Card sx={{ minWidth: "100%" }}>
-              <CardMedia
-                component="img"
-                height="140"
-                image="/static/images/cards/contemplative-reptile.jpg"
-                alt="food photo"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Food Name
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {description.length <= 150
-                    ? description
-                    : description.substring(0, 150) + "..."}
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <Button
-                    sx={{ marginTop: "1rem" }}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleAddtoCart}
-                  >
-                    Add to Cart
-                  </Button>
-                  <Button
-                    sx={{ marginTop: "1rem", marginLeft: "1rem" }}
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleRemove}
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {wishlist.length > 0 ? (
+              wishlist.map((item) => (
+                <Card sx={{ minWidth: "100%" }}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={item.image}
+                    alt="food photo"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.description.length > 100
+                        ? item.description.substring(0, 100) + "..."
+                        : item.description}
+                    </Typography>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Button
+                        sx={{ marginTop: "1rem" }}
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddtoCart}
+                      >
+                        Add to Cart
+                      </Button>
+                      <Button
+                        sx={{ marginTop: "1rem", marginLeft: "1rem" }}
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleRemove}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <Typography variant="h6" align="left" gutterBottom>
+                No items in wishlist
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </ThemeProvider>

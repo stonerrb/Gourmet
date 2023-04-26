@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  MenuItem,
-  MenuList,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, MenuItem, MenuList, ThemeProvider } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import CartFoodCard from "../Components/CartFoodCard";
@@ -36,12 +31,15 @@ const Cart = () => {
         const cart = await response.json();
         const cartItemData = await Promise.all(
           cart.food_items.map(async (item) => {
-            const itemResponse = await fetch(`/menu/get/cart/${item.food_item}`, {
-              method: "GET", 
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
+            const itemResponse = await fetch(
+              `/menu/get/cart/${item.food_item}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
             const ItemData = await itemResponse.json();
             return {
               ...ItemData,
@@ -55,11 +53,9 @@ const Cart = () => {
         console.error(e);
       }
     };
-    
-    
+
     fetchData();
   }, []);
-
 
   return (
     <React.Fragment>
@@ -72,7 +68,7 @@ const Cart = () => {
             alignItems: "center",
             height: "10px",
             paddingLeft: "20px",
-          }}  
+          }}
         >
           Cart
         </MenuList>

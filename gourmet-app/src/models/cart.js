@@ -44,6 +44,10 @@ const CartSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    taken:{
+        type: Boolean,
+        default: false
+    }
 })
 
 module.exports = mongoose.model("Cart", CartSchema);
