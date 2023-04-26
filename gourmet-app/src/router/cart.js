@@ -11,7 +11,7 @@ router.post("/cart/AddtoCart", async (req, res) => {
         const { profile_id, foodItemID,} = req.body;
         // if user already has a pending cart
         let cart = await Cart.findOne({ profile_id, status: "pending" })
-
+        console.log(profile_id, foodItemID);
         if (cart === null) {
             //IF NO CART IS FOUND CREATE A NEW ONE
             cart = new Cart({
@@ -79,16 +79,17 @@ router.post("/cart/remove", async (req, res) => {
 
 //give pending cart
 router.get("/cart/get", async (req, res) => {
-    try{
-        const { profile_id } = req.body;
-        let cart = await Cart.findOne({ profile_id, status: "pending" });
-        res.status(200).send(cart);
+    try {
+      const { profile_id } = req.query;
+      let cart = await Cart.findOne({ profile_id, status: "pending" });
+      res.status(200).send(cart);
+    } catch (e) {
+      console.log(e);
+      throw new Error("Unable to get cart");
     }
-    catch(e){
-        console.log(e);
-        throw new Error("Unable to get cart");
-    }
-});
+  });
+  
+  
 
 //Checkout the cart
 router.post("/cart/checkout", async (req, res) => {

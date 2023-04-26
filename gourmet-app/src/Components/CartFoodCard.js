@@ -12,14 +12,17 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./CartFoodCard.css";
 import { theme } from "./Theme";
+import Cookies from "js-cookie";
 
 const CartFoodCard = ({ foodItems }) => {
   const [quantity, setQuantity] = useState(1);
   const [amount, setAmount] = useState(0);
-
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+    }
+    if(quantity == 1){
+      setQuantity(1);
     }
     setAmount(foodItems.price * quantity);
   };
@@ -31,6 +34,67 @@ const CartFoodCard = ({ foodItems }) => {
   const handleAmount = () => {
     setAmount(quantity * foodItems.price);
   };
+
+  const AddtoCard= async() => {
+    handleIncreaseQuantity();
+    let profile_id = Cookies.get("userid");
+    let foodItemID = foodItems._id;
+    console.log(profile_id,foodItemID);
+    const res = await fetch("/cart/AddtoCart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        profile_id,
+        foodItemID,
+      }),
+    });
+    const data = await res.json();
+  };
+
+  useEffect(() => {
+  const CartData = async () => {
+    try {
+      let profile_id = Cookies.get("userid");
+      const response = await fetch(`/cart/get?profile_id=${profile_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const cart = await response.json(); 
+    }
+    catch (e) {
+      console.error(e);
+    }
+  };
+  CartData();
+  }, []);
+
+  const removeCart= async() => {
+    handleDecreaseQuantity();
+    let profile_id = Cookies.get("userid");
+    let foodItemID = foodItems._id;
+    console.log(profile_id,foodItemID);
+    const res = await fetch("/cart/remove", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        profile_id,
+        foodItemID,
+      }),
+    });
+    const data = await res.json();
+  };
+
+  //set quatity equal to cart.foodItems.food_item.quantity where food_item should match with foodItems._id
+
+  
+  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,7 +130,7 @@ const CartFoodCard = ({ foodItems }) => {
           <div className="bottom-cart">
             <div className="button-group-cart">
             <button
-                onClick={handleDecreaseQuantity}
+                onClick={removeCart}
                 className="quantity-buttons-cart"
               >
                 {quantity === 1 ? (
@@ -77,11 +141,11 @@ const CartFoodCard = ({ foodItems }) => {
               </button>
            
               <div className="quantity">
-                <span>{quantity}</span>
+                <span></span>
               </div>
               
               <button
-                onClick={handleIncreaseQuantity}
+                onClick={AddtoCard}
                 className="quantity-buttons-cart"
               >
                 <AddIcon sx={{ height: "15px", width: "15px" }} />
