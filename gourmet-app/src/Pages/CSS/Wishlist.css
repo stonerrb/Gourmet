@@ -1,0 +1,13 @@
+.wishlist-image {
+  position: absolute;
+  right: -120px;
+  top: -130px;
+  transform: scale(0.65);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+}
+.wishlist-image:hover {
+  position: fixed;
+  right: -130px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+  transform: scale(0.6);
+}
