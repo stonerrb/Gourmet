@@ -8,23 +8,21 @@ import Navbar from "../Components/Navbar";
 import "./CSS/Wishlist.css";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useState } from "react";
+
 const Wishlist = () => {
+  const [wishlist, setWishlist] = useState([]);
+
   useEffect(() => {
-    const userid = Cookies.get("userid");
+    const profile_id = Cookies.get("userid");
 
     function fetchData() {
-      fetch("/wishlist/get", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid,
-        }),
-      })
+      fetch(`/wishlist/get?profile_id=${profile_id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          const foodid = data.food_items;
+          const fooditemid = foodid.map((item) => item.food_item);
         });
     }
     fetchData();
