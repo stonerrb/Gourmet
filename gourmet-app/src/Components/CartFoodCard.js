@@ -28,8 +28,12 @@ const CartFoodCard = ({foodItems,number}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        profile_id,
-        foodItemID,
+        profile_id: profile_id, 
+        food_items: [
+          {
+            food_item: foodItemID,
+          }
+        ]
       }),
     });
     const data = await res.json();
@@ -63,8 +67,8 @@ const CartFoodCard = ({foodItems,number}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        profile_id,
-        foodItemID,
+        profile_id: profile_id,
+        foodItemID: foodItemID,
       }),
     });
     const data = await res.json();
