@@ -5,8 +5,30 @@ import { CardMedia } from "@mui/material";
 import { Typography } from "@mui/material";
 import { theme } from "../Components/Theme";
 import Navbar from "../Components/Navbar";
-
+import "./CSS/Wishlist.css";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 const Wishlist = () => {
+  useEffect(() => {
+    const userid = Cookies.get("userid");
+
+    function fetchData() {
+      fetch("/wishlist/get", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+    fetchData();
+  }, []);
   const handleAddtoCart = () => {
     console.log("Add to cart");
   };
@@ -19,6 +41,11 @@ const Wishlist = () => {
   return (
     <>
       <Navbar />
+      <img
+        src="https://i.imgur.com/EZTQncg.png"
+        alt="Dont Forget to Order!"
+        className="wishlist-image"
+      />
       <ThemeProvider theme={theme}>
         <Grid
           sx={{

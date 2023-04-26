@@ -35,6 +35,10 @@ function Contact() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
+          setFeedback({
+            topic: "",
+            description: "",
+          });
           alert("Feedback Submitted");
         }
       });
@@ -99,6 +103,7 @@ function Contact() {
                   label="Subject"
                   fullWidth
                   required
+                  value={feedback.topic}
                   onChange={(event) => {
                     setFeedback({
                       ...feedback,
@@ -113,6 +118,7 @@ function Contact() {
                   rows={4}
                   fullWidth
                   required
+                  value={feedback.description}
                   onChange={(event) => {
                     setFeedback({
                       ...feedback,
