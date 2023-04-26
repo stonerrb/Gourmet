@@ -40,6 +40,11 @@ const profileSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  rating: {
+    type: Number,
+    required: true,
+    default: 100
+  },
   wishlist: [
     {
       food_item: {
