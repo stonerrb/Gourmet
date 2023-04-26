@@ -5,7 +5,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Card, CardMedia, CardContent, Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -14,29 +14,11 @@ import "./CartFoodCard.css";
 import { theme } from "./Theme";
 import Cookies from "js-cookie";
 
-const CartFoodCard = ({ foodItems }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [amount, setAmount] = useState(0);
-  const handleDecreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-    if(quantity == 1){
-      setQuantity(1);
-    }
-    setAmount(foodItems.price * quantity);
-  };
+const CartFoodCard = ({foodItems,number}) => {
+  
 
-  const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
-    handleAmount();
-  };
-  const handleAmount = () => {
-    setAmount(quantity * foodItems.price);
-  };
 
   const AddtoCard= async() => {
-    handleIncreaseQuantity();
     let profile_id = Cookies.get("userid");
     let foodItemID = foodItems._id;
     console.log(profile_id,foodItemID);
@@ -73,7 +55,6 @@ const CartFoodCard = ({ foodItems }) => {
   }, []);
 
   const removeCart= async() => {
-    handleDecreaseQuantity();
     let profile_id = Cookies.get("userid");
     let foodItemID = foodItems._id;
     console.log(profile_id,foodItemID);
@@ -133,7 +114,7 @@ const CartFoodCard = ({ foodItems }) => {
                 onClick={removeCart}
                 className="quantity-buttons-cart"
               >
-                {quantity === 1 ? (
+                {foodItems.quantity === 1 ? (
                   <DeleteIcon sx={{ height: "15px", width: "15px" }} />
                 ) : (
                   <RemoveIcon sx={{ height: "15px", width: "15px" }} />
@@ -141,7 +122,7 @@ const CartFoodCard = ({ foodItems }) => {
               </button>
            
               <div className="quantity">
-                <span></span>
+                <span>{foodItems.quantity}</span>
               </div>
               
               <button
@@ -160,7 +141,7 @@ const CartFoodCard = ({ foodItems }) => {
                 width: "30%",
               }}
             >
-              Rs. {amount} /-
+              Rs.{foodItems.price}*{foodItems.quantity}  /-
             </Typography>
           </div>
         </CardContent>

@@ -33,7 +33,7 @@ const Cart = () => {
             "Content-Type": "application/json",
           },
         });
-        const cart = await response.json();     
+        const cart = await response.json();
         const cartItemData = await Promise.all(
           cart.food_items.map(async (item) => {
             const itemResponse = await fetch(`/menu/get/cart/${item.food_item}`, {
@@ -43,10 +43,14 @@ const Cart = () => {
               },
             });
             const ItemData = await itemResponse.json();
-            return ItemData;
+            return {
+              ...ItemData,
+              quantity: item.quantity,
+            };
           })
         );
         setcartItems(cartItemData);
+        
       } catch (e) {
         console.error(e);
       }
@@ -84,7 +88,7 @@ const Cart = () => {
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
               <MenuItem disableRipple>
-                <CartFoodCard key={item.id} foodItems={item} />
+                <CartFoodCard key={item.id} number={29} foodItems={item} />
               </MenuItem>
             ))
           ) : (
