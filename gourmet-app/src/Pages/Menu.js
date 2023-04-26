@@ -36,7 +36,6 @@ function Menu() {
     }
   };
 
-  
   const filteredDishes = selectedCategory
     ? dishes.filter((dish) => dish.cuisine === selectedCategory)
     : dishes;
@@ -70,6 +69,11 @@ function Menu() {
                     className="button"
                     size="small"
                     onClick={() => handleDishType("starters")}
+                    sx={{
+                      padding: "10px",
+                      borderRadius: "10px",
+                      margin: "5px",
+                    }}
                   >
                     Breakfast
                   </Button>
@@ -83,6 +87,11 @@ function Menu() {
                     className="button"
                     size="small"
                     onClick={() => handleDishType("MainCourse")}
+                    sx={{
+                      padding: "10px",
+                      borderRadius: "10px",
+                      margin: "5px",
+                    }}
                   >
                     Main Course
                   </Button>
@@ -94,6 +103,11 @@ function Menu() {
                     className="button"
                     size="small"
                     onClick={() => handleDishType("desert")}
+                    sx={{
+                      padding: "10px",
+                      borderRadius: "10px",
+                      margin: "5px",
+                    }}
                   >
                     Deserts
                   </Button>
@@ -105,6 +119,11 @@ function Menu() {
                     className="button"
                     size="small"
                     onClick={() => handleDishType("drinks")}
+                    sx={{
+                      padding: "10px",
+                      borderRadius: "10px",
+                      margin: "5px",
+                    }}
                   >
                     Drinks
                   </Button>

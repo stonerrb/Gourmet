@@ -155,7 +155,7 @@ function Navbar() {
               color="inherit"
               onClick={handleClick2}
             >
-              <Badge badgeContent={dishes.length} color="error">
+              <Badge badgeContent="" color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
