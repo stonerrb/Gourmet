@@ -12,7 +12,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./CartFoodCard.css";
 import { theme } from "./Theme";
-import { useEffect } from "react";
 import Cookies from "js-cookie";
 
 const CartFoodCard = ({foodItems,number}) => {
@@ -70,8 +69,6 @@ const CartFoodCard = ({foodItems,number}) => {
     });
     const data = await res.json();
   };
-
-  //set quatity equal to cart.foodItems.food_item.quantity where food_item should match with foodItems._id
 
   return (
     <ThemeProvider theme={theme}>
