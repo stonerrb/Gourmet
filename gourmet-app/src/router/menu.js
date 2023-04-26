@@ -35,10 +35,10 @@ router.post("/menu/add/foodItem", async (req, res) => {
 });
 
 //Get menu items
-router.get("/menu/get", async (_req, res) => {
+router.get("/menu/get", async (req, res) => {
   try {
     const food_item = await FoodItems.find({});
-    // console.log(food_item);
+    
     res.send({ food_item });
   } catch (e) {
     res.status(404).send();
