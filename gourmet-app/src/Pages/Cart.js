@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  MenuItem,
-  MenuList,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, MenuItem, MenuList, ThemeProvider } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import CartFoodCard from "../Components/CartFoodCard";
@@ -22,31 +17,41 @@ const Cart = () => {
     setAnchorEl(null);
   };
 
-  const [dishes, setDishes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [dishType, setDishType] = useState();
-
+  const [cartItems, setcartItems] = useState([]);
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/cart/get", {
+        let profile_id = Cookies.get("userid");
+        const response = await fetch(`/cart/get?profile_id=${profile_id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            profile_id: Cookies.get("userid"),
-          }),
         });
-        const data = await response.json();
-        setDishes(data.food_items);
+        const cart = await response.json();
+        const cartItemData = await Promise.all(
+          cart.food_items.map(async (item) => {
+            const itemResponse = await fetch(
+              `/menu/get/cart/${item.food_item}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            const ItemData = await itemResponse.json();
+            return ItemData;
+          })
+        );
+        setcartItems(cartItemData);
       } catch (e) {
         console.error(e);
       }
-    }
-    fetchData(); 
-  }, []);
+    };
 
+    fetchData();
+  }, []);
 
   return (
     <React.Fragment>
@@ -59,7 +64,7 @@ const Cart = () => {
             alignItems: "center",
             height: "10px",
             paddingLeft: "20px",
-          }}  
+          }}
         >
           Cart
         </MenuList>
@@ -72,10 +77,10 @@ const Cart = () => {
             overflowY: "scroll",
           }}
         >
-          {dishes.length > 0 ? (
-            dishes.map((item, index) => (
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <MenuItem disableRipple>
-                <CartFoodCard key={index} foodItems={item} />
+                <CartFoodCard key={item.id} foodItems={item} />
               </MenuItem>
             ))
           ) : (

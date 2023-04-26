@@ -22,9 +22,6 @@ const ProtectedRoute = (props) => {
         }),
       });
       const data = await response.json();
-      console.log(data);
-      console.log(data.success);
-      console.log(data.user);
       if (data.success === false) {
         navigate("/login");
       } else if (

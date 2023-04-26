@@ -62,11 +62,13 @@ const FoodCard = ({ foodItems }) => {
   };
 
 
-  const profileid = Cookies.get("userid");
+  
 
-  const AddtoCart= async(profile_id,fooditems_Id) => {
-    console.log(profile_id,fooditems_Id);
-    
+
+  const AddtoCart= async() => {
+    let profile_id = Cookies.get("userid");
+    let foodItemID = foodItems._id;
+    console.log(profile_id,foodItemID);
     const res = await fetch("/cart/AddtoCart", {
       method: "POST",
       headers: {
@@ -74,7 +76,7 @@ const FoodCard = ({ foodItems }) => {
       },
       body: JSON.stringify({
         profile_id,
-        fooditems_Id,
+        foodItemID,
       }),
     });
     const data = await res.json();
@@ -118,7 +120,7 @@ const FoodCard = ({ foodItems }) => {
             </div>
           <div className="button-group2">
             
-            <IconButton aria-label="add to cart" onClick={()=>AddtoCart(profileid,foodItems._id)}>
+            <IconButton aria-label="add to cart" onClick={AddtoCart}>
               <AddShoppingCartIcon sx={{width:'30px',height:'30px'}}/>
             </IconButton>
           </div>
