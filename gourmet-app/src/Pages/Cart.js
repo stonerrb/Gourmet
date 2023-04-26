@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
-  Badge,
   Button,
-  IconButton,
-  Menu,
   MenuItem,
   MenuList,
   ThemeProvider,
-  Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import CartFoodCard from "../Components/CartFoodCard";
 import { theme } from "../Components/Theme";
+import Cookies from "js-cookie";
 
 const Cart = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,14 +27,26 @@ const Cart = () => {
   const [dishType, setDishType] = useState();
 
   useEffect(() => {
-    fetch("/cart/get")
-      .then((res) => res.json())
-      .then((data) => {
-        const dish = data.food_item;
-        setDishes(dish);
-      })
-      .catch((err) => console.log(err));
+    async function fetchData() {
+      try {
+        const response = await fetch("/cart/get", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            profile_id: Cookies.get("userid"),
+          }),
+        });
+        const data = await response.json();
+        setDishes(data.food_items);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchData(); 
   }, []);
+
 
   return (
     <React.Fragment>

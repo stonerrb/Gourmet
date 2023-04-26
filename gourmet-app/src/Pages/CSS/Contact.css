@@ -10,13 +10,61 @@
 .links-contact > .links-contact-content:hover {
   color: rgb(255, 255, 255);
 }
-.social-icon {
+.social-icon-facebook {
   color: rgb(228, 129, 14);
   transform: scale(2);
   margin-left: 6px;
   margin-right: 25px;
   margin-top: 10px;
   margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
+}
+.social-icon-facebook:hover {
+  color: rgb(27, 127, 250);
+  transform: scale(2.2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
+}
+
+.social-icon-instagram {
+  color: rgb(228, 129, 14);
+  transform: scale(2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
+}
+.social-icon-instagram:hover {
+  color: rgb(230, 5, 222);
+  transform: scale(2.2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
+}
+
+.social-icon-twitter {
+  color: rgb(228, 129, 14);
+  transform: scale(2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
+}
+.social-icon-twitter:hover {
+  color: rgb(14, 103, 228);
+  transform: scale(2.2);
+  margin-left: 6px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: ease-in-out 0.3s;
 }
 .map-link {
   color: rgb(228, 57, 14);

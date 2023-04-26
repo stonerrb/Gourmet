@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, TextField, Button, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../Components/Theme";
@@ -10,9 +10,38 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 function Contact() {
+  const Feedback = {
+    topic: "",
+    description: "",
+  };
+
+  const [feedback, setFeedback] = useState(Feedback);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Submit form data here
+    const username = localStorage.getItem("username");
+    const { topic, description } = feedback;
+    fetch("/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        topic,
+        description,
+        user_name: username,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setFeedback({
+            topic: "",
+            description: "",
+          });
+          alert("Feedback Submitted");
+        }
+      });
   };
 
   return (
@@ -74,6 +103,13 @@ function Contact() {
                   label="Subject"
                   fullWidth
                   required
+                  value={feedback.topic}
+                  onChange={(event) => {
+                    setFeedback({
+                      ...feedback,
+                      topic: event.target.value,
+                    });
+                  }}
                 />
                 <TextField
                   sx={{ marginBottom: "1rem" }}
@@ -82,6 +118,13 @@ function Contact() {
                   rows={4}
                   fullWidth
                   required
+                  value={feedback.description}
+                  onChange={(event) => {
+                    setFeedback({
+                      ...feedback,
+                      description: event.target.value,
+                    });
+                  }}
                 />
                 <br />
                 <Button type="submit" variant="contained" color="primary">
@@ -141,13 +184,16 @@ function Contact() {
               </Typography>
               <div className="social-icons">
                 <Link to={"https://www.facebook.com/"}>
-                  <FacebookRoundedIcon className="social-icon" />
+                  <FacebookRoundedIcon className="social-icon-facebook" />
                 </Link>
                 <Link to={"https://www.instagram.com/"}>
-                  <InstagramIcon className="social-icon" />
+                  <InstagramIcon
+                    className="social-icon-instagram"
+                    id="myPath"
+                  />
                 </Link>
                 <Link to={"https://twitter.com/"}>
-                  <TwitterIcon className="social-icon" />
+                  <TwitterIcon className="social-icon-twitter" />
                 </Link>
               </div>
             </div>
